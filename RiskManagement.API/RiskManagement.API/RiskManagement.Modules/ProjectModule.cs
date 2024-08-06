@@ -67,17 +67,6 @@ public class ProjectModule : CarterModule
             };
         });
         
-        app.MapPost("/users/getAllUsers", [Authorize] async (IUserService service, HttpContext httpContext) =>
-        {
-            var res = await service.GetAllUsersService(httpContext);
-            return res.Code switch
-            {
-                200 => Results.Ok(new { Token = res.Content }),
-                404 => Results.NotFound(),
-                _  => Results.Problem("عملیات با خطا مواجه شد")
-            };
-        });
-        
         app.MapPost("/project/getProjectById", [Authorize] async (IProjectService service, long id) =>
         {
             var res = await service.GetProjectByIdService(id);
