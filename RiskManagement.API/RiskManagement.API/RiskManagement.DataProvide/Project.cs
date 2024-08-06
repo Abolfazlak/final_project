@@ -13,4 +13,6 @@ public class Project
     public long? AssigneeUserId { get; set; }
     
     public virtual Company Company { get; set; }
+    public virtual ICollection<Risk> Risks { get; set; }
+
 }

@@ -48,6 +48,10 @@ builder.Services.AddDbContext<RiskManagementDbContext>(options =>
 });
 
 builder.Services.AddScoped<ICommonHelper, CommonHelper>()
+                .AddScoped<IProjectRepo, ProjectRepo>()
+                .AddScoped<IProjectService, ProjectService>()
+                .AddScoped<IRiskRepo, RiskRepo>()
+                .AddScoped<IRiskService, RiskService>()
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IUserRepo, UserRepo>();
 
@@ -63,7 +67,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSwaggerGen(opt =>
 {
-    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
+    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "RiskManagement", Version = "v1" });
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,

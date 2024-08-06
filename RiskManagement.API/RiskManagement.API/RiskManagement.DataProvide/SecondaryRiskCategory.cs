@@ -10,4 +10,6 @@ public class SecondaryRiskCategory
     public int MainRiskCategoryId { get; set; }
 
     public virtual MainRiskCategory MainRiskCategory{ get; set; }
+    public virtual ICollection<Risk> Risks { get; set; }
+
 }

@@ -24,7 +24,7 @@ public class ProjectModule : CarterModule
             };
         });
         
-        app.MapPost("/project/createProject", async (IUserService userService, 
+        app.MapPost("/project/createProject", [Authorize] async (IUserService userService, 
             IProjectService service, HttpContext httpContext, CreateProjectDto dto) =>
         {
             var isAdmin = userService.GetIsAdminFromHttpContext(httpContext);
@@ -38,7 +38,7 @@ public class ProjectModule : CarterModule
             };
         });
         
-        app.MapPost("/project/updateProject", async (IUserService userService, 
+        app.MapPost("/project/updateProject", [Authorize] async (IUserService userService, 
             IProjectService service, HttpContext httpContext, CreateProjectDto dto) =>
         {
             var isAdmin = userService.GetIsAdminFromHttpContext(httpContext);
@@ -52,7 +52,7 @@ public class ProjectModule : CarterModule
             };
         });
         
-        app.MapPost("/project/deleteProject", async (IUserService userService, 
+        app.MapPost("/project/deleteProject", [Authorize] async (IUserService userService, 
             IProjectService service, HttpContext httpContext, long id) =>
         {
             var isAdmin = userService.GetIsAdminFromHttpContext(httpContext);
@@ -67,7 +67,7 @@ public class ProjectModule : CarterModule
             };
         });
         
-        app.MapPost("/users/getAllUsers", async (IUserService service, HttpContext httpContext) =>
+        app.MapPost("/users/getAllUsers", [Authorize] async (IUserService service, HttpContext httpContext) =>
         {
             var res = await service.GetAllUsersService(httpContext);
             return res.Code switch
@@ -78,7 +78,7 @@ public class ProjectModule : CarterModule
             };
         });
         
-        app.MapPost("/project/getProjectById", async (IProjectService service, long id) =>
+        app.MapPost("/project/getProjectById", [Authorize] async (IProjectService service, long id) =>
         {
             var res = await service.GetProjectByIdService(id);
             return res.Code switch
