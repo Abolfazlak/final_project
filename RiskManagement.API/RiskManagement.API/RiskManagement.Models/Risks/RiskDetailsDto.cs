@@ -13,8 +13,8 @@ public class RiskDetailsDto
     public int? OpportunityImpact { get; set; }
     public int? OpportunityScore { get; set; }
     
-    public long? EstimatedRiskAmount { get; set; }
-    public long? EstimatedOpportunityAmount { get; set; }
+    public long EstimatedRiskAmount { get; set; }
+    public long EstimatedOpportunityAmount { get; set; }
     
     public string? Document { get; set; }
     public DateTime EstimatedDateTime { get; set; }

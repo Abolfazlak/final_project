@@ -12,7 +12,7 @@ public class ProjectModule : CarterModule
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         
-        app.MapPost("/project/getAllProjects", [Authorize] async (IProjectService service,
+        app.MapGet("/project/getAllProjects", [Authorize] async (IProjectService service,
             HttpContext httpContext) =>
         {
             var res = await service.GetAllProjectsService(httpContext);
@@ -67,7 +67,7 @@ public class ProjectModule : CarterModule
             };
         });
         
-        app.MapPost("/project/getProjectById", [Authorize] async (IProjectService service, long id) =>
+        app.MapGet("/project/getProjectById", [Authorize] async (IProjectService service, long id) =>
         {
             var res = await service.GetProjectByIdService(id);
             return res.Code switch

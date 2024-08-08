@@ -54,6 +54,7 @@ public class RiskModule : CarterModule
             {
                 200 => Results.Ok(new { Data = res.Content }),
                 403 => Results.Forbid(),
+                404 => Results.NotFound(),
                 _ => Results.Problem(res.Content)
             };
         });

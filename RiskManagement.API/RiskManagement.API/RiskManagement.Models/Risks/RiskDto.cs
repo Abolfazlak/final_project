@@ -10,6 +10,28 @@ public class RiskDto
     public SecondaryRiskCategoryDto SecondaryRiskCategory { get; set; }
 }
 
+public class RiskStatusDto : RiskDto
+{
+    public int Status { get; set; }
+    public DateTime EstimatedFinishedDate { get; set; }
+    public DateTime? FinishedDate { get; set; }
+    public long EstimatedAmount { get; set; }
+    public long? FinalAmount { get; set; }
+    public UpdateSolutionDto? BestSolution { get; set; }
+}
+
+public class InputRiskStatusDto
+{
+    public long Id { get; set; }
+    public int Status { get; set; }
+    public DateTime FinishedDate { get; set; }
+    public long FinalAmount { get; set; }
+    public long? SolutionId { get; set; }
+    public string? SolutionTitle { get; set; }
+    public bool IsNewSolution { get; set; }
+
+}
+
 public class MainRiskCategoryDto
 {
     public int Id { get; set; }

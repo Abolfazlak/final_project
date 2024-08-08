@@ -59,7 +59,7 @@ public class UserModule : CarterModule
             };
         });
         
-        app.MapPost("/users/getAllUsers", async (IUserService service, HttpContext httpContext) =>
+        app.MapGet("/users/getAllUsers", async (IUserService service, HttpContext httpContext) =>
         {
             var res = await service.GetAllUsersService(httpContext);
             return res.Code switch
@@ -70,7 +70,7 @@ public class UserModule : CarterModule
             };
         });
         
-        app.MapPost("/users/getUserById", async (IUserService service, long id) =>
+        app.MapGet("/users/getUserById", async (IUserService service, long id) =>
         {
             var res = await service.GetUserByIdService(id);
             return res.Code switch

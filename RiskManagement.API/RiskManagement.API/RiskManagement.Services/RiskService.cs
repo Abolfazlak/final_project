@@ -10,6 +10,281 @@ namespace RiskManagement.API.RiskManagement.Services;
 
 public class RiskService(IRiskRepo repo, IUserService userService) : IRiskService
 {
+    //Solution
+    public async Task<ResponseMessage<string>> AddSolution(InputSolutionDto dto)
+    {
+        try
+        {
+            await repo.AddSolution(new Solution
+            {
+                Description = dto.Description,
+                Amount = dto.Amount,
+                RiskId = dto.RiskId,
+            });
+            
+            return new ResponseMessage<string>
+            {
+                Code = 200,
+                Content = "عملیات با موفقیت انجام شد"
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<string>
+            {
+                Code = 500,
+                Content = "عملیات با خطا مواجه شد" + e.Message
+            };
+        }
+    }
+    public async Task<ResponseMessage<string>> UpdateSolution(UpdateSolutionDto dto)
+    {
+        try
+        {
+            var solution = await repo.GetSolutionsBySolutionId(dto.Id);
+            if (solution == null)
+            {
+                return new ResponseMessage<string>
+                {
+                    Code = 404,
+                    Content = "اطلاعات یافت نشد!"
+                };
+            }
+
+            solution.Description = dto.Description;
+            solution.Amount = dto.Amount;
+
+            await repo.UpdateSolution(solution);
+            
+            return new ResponseMessage<string>
+            {
+                Code = 200,
+                Content = "عملیات با موفقیت انجام شد"
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<string>
+            {
+                Code = 500,
+                Content = "عملیات با خطا مواجه شد" + e.Message
+            };
+        }
+    }
+    public async Task<ResponseMessage<string>> DeleteSolution(long id)
+    {
+        try
+        {
+            var solution = await repo.GetSolutionsBySolutionId(id);
+            if (solution == null)
+            {
+                return new ResponseMessage<string>
+                {
+                    Code = 404,
+                    Content = "اطلاعات یافت نشد!"
+                };
+            }
+            await repo.RemoveSolution(solution);
+            
+            return new ResponseMessage<string>
+            {
+                Code = 200,
+                Content = "عملیات با موفقیت انجام شد"
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<string>
+            {
+                Code = 500,
+                Content = "عملیات با خطا مواجه شد" + e.Message
+            };
+        }
+    }
+    public async Task<ResponseMessage<UpdateSolutionDto?>> GetSolutionById(long id)
+    {
+        try
+        {
+            var solution = await repo.GetSolutionsBySolutionId(id);
+            if (solution == null)
+            {
+                return new ResponseMessage<UpdateSolutionDto?>
+                {
+                    Code = 404,
+                    Content = null
+                };
+            }
+            
+            return new ResponseMessage<UpdateSolutionDto?>
+            {
+                Code = 200,
+                Content = new UpdateSolutionDto
+                {
+                    Description = solution.Description,
+                    Amount = solution.Amount,
+                    RiskId = solution.RiskId,
+                    Id = solution.Id
+                }
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<UpdateSolutionDto?>
+            {
+                Code = 500,
+                Content = null
+            };
+        }
+    }
+    public async Task<ResponseMessage<List<UpdateSolutionDto>>> GetAllSolutionsByRiskId(long id)
+    {
+        try
+        {
+            var solution = await repo.GetAllSolutions(id);
+            if (solution.Count == 0)
+            {
+                return new ResponseMessage<List<UpdateSolutionDto>>
+                {
+                    Code = 404,
+                    Content = []
+                };
+            }
+            
+            return new ResponseMessage<List<UpdateSolutionDto>>
+            {
+                Code = 200,
+                Content = solution
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<List<UpdateSolutionDto>>
+            {
+                Code = 500,
+                Content = []
+            };
+        }
+    }
+
+    
+
+    //Risk Status
+    public async Task<ResponseMessage<List<RiskStatusDto>>> GetAllRiskStatusByProjectIdService(long id)
+    {
+        try
+        {
+            var res = await repo.GetAllRiskStatusByProjectId(id);
+            if (res.Count == 0)
+            {
+                return new ResponseMessage<List<RiskStatusDto>>
+                {
+                    Code = 404,
+                    Content = []
+                };
+            }
+
+            return new ResponseMessage<List<RiskStatusDto>>
+            {
+                Code = 200,
+                Content = res
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<List<RiskStatusDto>>
+            {
+                Code = 500,
+                Content = []
+            };
+        }
+    }
+    public async Task<ResponseMessage<List<RiskStatusDto>>> GetAllRiskStatusByProjectIdAnStatusService(long id, int status)
+    {
+        try
+        {
+            var res = await repo.GetAllRiskStatusByProjectIdAndStatus(id, status);
+            if (res.Count == 0)
+            {
+                return new ResponseMessage<List<RiskStatusDto>>
+                {
+                    Code = 404,
+                    Content = []
+                };
+            }
+
+            return new ResponseMessage<List<RiskStatusDto>>
+            {
+                Code = 200,
+                Content = res
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<List<RiskStatusDto>>
+            {
+                Code = 500,
+                Content = []
+            };
+        }
+    }
+    public async Task<ResponseMessage<string>> ChangeRiskStatus(InputRiskStatusDto dto)
+    {
+        try
+        {
+            var risk = await repo.GetRiskById(dto.Id);
+
+            if (risk == null)
+            {
+                return new ResponseMessage<string>
+                {
+                    Code = 404,
+                    Content = "ریسک کورد نظر یافت نشد!"
+                };
+            }
+        
+            if (dto.Status == 2)
+            {
+                if (!dto.IsNewSolution)
+                {
+                    risk.BestSolutionId = dto.SolutionId;
+                }
+                else
+                {
+                    await repo.AddSolution(new Solution
+                    {
+                        Description = dto.SolutionTitle!,
+                        Amount = dto.FinalAmount,
+                        RiskId = dto.Id,
+                    });
+
+                    var solutions = await repo.GetAllSolutions(dto.Id);
+                    var sId = solutions.FirstOrDefault(s => s.Description == dto.SolutionTitle)!.Id;
+                    risk.BestSolutionId = sId;
+                }
+            }
+
+            risk.FinalAmount = dto.FinalAmount;
+            risk.FinishedDate = dto.FinishedDate;
+
+            await repo.UpdateRisk(risk);
+
+            return new ResponseMessage<string>
+            {
+                Code = 200,
+                Content = "عملیات با موفقیت انجام شد"
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<string>
+            {
+                Code = 500,
+                Content = "عملیات با خطا مواجه شد" + e.Message
+            };
+        }
+        
+    }
+
     //RiskCategory
     public async Task<ResponseMessage<List<MainRiskCategoryDto>>> GetMainRiskCategories()
     {
