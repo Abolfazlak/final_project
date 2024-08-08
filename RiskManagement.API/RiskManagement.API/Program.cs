@@ -52,6 +52,8 @@ builder.Services.AddScoped<ICommonHelper, CommonHelper>()
                 .AddScoped<IProjectService, ProjectService>()
                 .AddScoped<IRiskRepo, RiskRepo>()
                 .AddScoped<IRiskService, RiskService>()
+                .AddScoped<IReportRepo, ReportRepo>()
+                .AddScoped<IReportService, ReportService>()
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IUserRepo, UserRepo>();
 

@@ -28,7 +28,9 @@ public interface IRiskRepo
     public Task AddRiskDetailToDb(RiskDetails riskDetails);
     public Task UpdateRiskDetail(RiskDetails riskDetails);
     public Task RemoveRiskDetails(RiskDetails risk);
-    public Task<RiskDetails?> GetRiskDetailById(long id);
+    public Task<RiskDetailUpdateDto?> GetRiskDetailById(long id);
+    public Task<RiskDetails?> GetFullRiskDetailById(long id);
+
     
     
     //Risk Status

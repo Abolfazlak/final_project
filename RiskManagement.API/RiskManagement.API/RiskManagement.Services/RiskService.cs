@@ -263,6 +263,7 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
                 }
             }
 
+            risk.Status = dto.Status;
             risk.FinalAmount = dto.FinalAmount;
             risk.FinishedDate = dto.FinishedDate;
 
@@ -437,7 +438,7 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
                 return responseMessage!;
             }
 
-            var getRiskDetails = await repo.GetRiskDetailById(getRisk.Id);
+            var getRiskDetails = await repo.GetFullRiskDetailById(getRisk.Id);
 
             if (getRiskDetails != null)
             {
@@ -549,7 +550,7 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
             }
             
             const string documentUrl = "";
-            var riskDetail = await repo.GetRiskDetailById(riskDetails.Id);
+            var riskDetail = await repo.GetFullRiskDetailById(riskDetails.Id);
 
             if (riskDetail == null)
             {
@@ -595,7 +596,7 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
 
     }
 
-    public async Task<ResponseMessage<RiskDetails?>> GetRiskDetailById(HttpContext httpContext, long id)
+    public async Task<ResponseMessage<RiskDetailUpdateDto?>> GetRiskDetailById(HttpContext httpContext, long id)
     {
         try
         {
@@ -604,7 +605,7 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
             if (riskDetails != null &&
                 CheckAccessToProjectByRisk(httpContext, riskDetails.RiskId, out var responseMessage))
             {
-                return new ResponseMessage<RiskDetails?>
+                return new ResponseMessage<RiskDetailUpdateDto?>
                 {
                     Code = responseMessage!.Code,
                     Content = null
@@ -613,13 +614,13 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
             
             if (riskDetails == null)
             {
-                return new ResponseMessage<RiskDetails?>
+                return new ResponseMessage<RiskDetailUpdateDto?>
                 {
                     Code = 404,
                     Content = null
                 };
             }
-            return new ResponseMessage<RiskDetails?>
+            return new ResponseMessage<RiskDetailUpdateDto?>
             {
                 Code = 200,
                 Content = riskDetails
@@ -628,7 +629,7 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
         }
         catch (Exception e)
         {
-            return new ResponseMessage<RiskDetails?>
+            return new ResponseMessage<RiskDetailUpdateDto?>
             {
                 Code = 500,
                 Content = null

@@ -8,10 +8,8 @@ public class RiskDetailsDto
 
     public int? RiskProbability { get; set; }
     public int? RiskImpact { get; set; }
-    public int? RiskScore { get; set; }
     public int? OpportunityProbability { get; set; }
     public int? OpportunityImpact { get; set; }
-    public int? OpportunityScore { get; set; }
     
     public long EstimatedRiskAmount { get; set; }
     public long EstimatedOpportunityAmount { get; set; }

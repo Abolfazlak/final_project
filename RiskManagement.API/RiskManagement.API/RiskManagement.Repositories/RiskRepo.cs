@@ -124,6 +124,7 @@ public class RiskRepo(RiskManagementDbContext context) : IRiskRepo
     public async Task<List<RiskDto>> GetAllRiskByProjectId(long id)
     {
         var res = await context.Risks
+            .Include(r => r.Project)
             .Include(r => r.SecondaryRiskCategory)
             .Include(r => r.SecondaryRiskCategory.MainRiskCategory)
             .Where(r => r.ProjectId == id)
@@ -131,6 +132,7 @@ public class RiskRepo(RiskManagementDbContext context) : IRiskRepo
             {
                 Id = r.Id,
                 Title = r.Title,
+                Methodology = r.Project.Methodology,
                 MainRiskCategory = new MainRiskCategoryDto
                 {
                     Id = r.SecondaryRiskCategory.MainRiskCategory.Id,
@@ -171,9 +173,34 @@ public class RiskRepo(RiskManagementDbContext context) : IRiskRepo
         await context.SaveChangesAsync();
     }
     
-    public async Task<RiskDetails?> GetRiskDetailById(long id)
+        
+    public async Task<RiskDetails?> GetFullRiskDetailById(long id)
     {
-        return await context.RiskDetails.FirstOrDefaultAsync(rd => rd.RiskId == id);
+        var details = await context.RiskDetails.FirstOrDefaultAsync(rd => rd.RiskId == id);
+        return details;
+    }
+    public async Task<RiskDetailUpdateDto?> GetRiskDetailById(long id)
+    {
+        var details = await context.RiskDetails
+            .Where(rd => rd.RiskId == id)
+            .Select(rd => new RiskDetailUpdateDto
+            {
+                Description = rd.Description,
+                RupPhase = rd.RupPhase,
+                IsOpportunity = rd.IsOpportunity,
+                RiskProbability = rd.RiskProbability,
+                RiskImpact = rd.RiskImpact,
+                OpportunityProbability = rd.OpportunityProbability,
+                OpportunityImpact = rd.OpportunityImpact,
+                EstimatedRiskAmount = rd.EstimatedRiskAmount,
+                EstimatedOpportunityAmount = rd.EstimatedOpportunityAmount,
+                Document = rd.DocumentUrl,
+                EstimatedDateTime = rd.EstimatedDateTime,
+                RiskId = rd.RiskId,
+                Id = rd.Id
+            })
+            .FirstOrDefaultAsync();
+        return details;
     }
     
     /*

@@ -39,7 +39,7 @@ public class ProjectModule : CarterModule
         });
         
         app.MapPost("/project/updateProject", [Authorize] async (IUserService userService, 
-            IProjectService service, HttpContext httpContext, CreateProjectDto dto) =>
+            IProjectService service, HttpContext httpContext, UpdateProjectDto dto) =>
         {
             var isAdmin = userService.GetIsAdminFromHttpContext(httpContext);
             if (!isAdmin) return Results.Forbid();
@@ -72,7 +72,7 @@ public class ProjectModule : CarterModule
             var res = await service.GetProjectByIdService(id);
             return res.Code switch
             {
-                200 => Results.Ok(new { Token = res.Content }),
+                200 => Results.Ok(new { Data = res.Content }),
                 404 => Results.NotFound(),
                 _  => Results.Problem("عملیات با خطا مواجه شد")
             };

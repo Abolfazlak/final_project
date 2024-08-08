@@ -6,6 +6,7 @@ public class RiskDto
 {
     public long Id { get; set; }
     public string Title { get; set; }
+    public string Methodology { get; set; }
     public MainRiskCategoryDto MainRiskCategory { get; set; }
     public SecondaryRiskCategoryDto SecondaryRiskCategory { get; set; }
 }

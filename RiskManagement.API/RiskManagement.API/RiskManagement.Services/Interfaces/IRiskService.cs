@@ -33,5 +33,5 @@ public interface IRiskService
     //Risk Details
     public Task<ResponseMessage<string>> AddRiskDetailService(HttpContext httpContext, RiskDetailsDto riskDetails);
     public Task<ResponseMessage<string>> UpdateRiskDetailService(HttpContext httpContext, RiskDetailUpdateDto riskDetails);
-    public Task<ResponseMessage<RiskDetails?>> GetRiskDetailById(HttpContext httpContext, long id);
+    public Task<ResponseMessage<RiskDetailUpdateDto?>> GetRiskDetailById(HttpContext httpContext, long id);
 }

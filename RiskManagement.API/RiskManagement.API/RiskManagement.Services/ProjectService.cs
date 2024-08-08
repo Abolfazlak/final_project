@@ -179,7 +179,7 @@ public class ProjectService(IProjectRepo projectRepo, IUserService userService) 
     }
     
     
-    public async Task<ResponseMessage<string>> UpdateProjectService(CreateProjectDto dto, HttpContext httpContext)
+    public async Task<ResponseMessage<string>> UpdateProjectService(UpdateProjectDto dto, HttpContext httpContext)
     {
         try
         {
@@ -224,7 +224,7 @@ public class ProjectService(IProjectRepo projectRepo, IUserService userService) 
         };
     }
     
-    private static Project CreateProjectById(CreateProjectDto dto, long companyId)
+    private static Project CreateProjectById(UpdateProjectDto dto, long companyId)
     {
         return new Project
         {
