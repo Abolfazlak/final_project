@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7gZH02lyRjfj42PN3JHeG3KvxGv8kgHWfpHnX94OJn4=",
+  "Source": "RiskManagement.API",
+  "BasePath": "_content/RiskManagement.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,21 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	
+	
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
+  &lt;Assembly Path="/usr/local/share/dotnet/packs/Microsoft.AspNetCore.App.Ref/8.0.3/ref/net8.0/Microsoft.AspNetCore.Http.Results.dll" /&gt;
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3763d45d_002D01e2_002D4469_002D8e9c_002D14ff1e0e4c09/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SolutionServiceTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::3D83AC15-B64D-428F-83BE-7E7BDE081518::net8.0::RiskManagement.Test.Solution.SolutionServiceTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::3D83AC15-B64D-428F-83BE-7E7BDE081518::net8.0::RiskManagement.Test.RiskStatus.RiskStatusServiceTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4e8fa9ce_002D552e_002D4499_002D8ade_002D8a6059b32d6a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="RegisterAdminTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::3D83AC15-B64D-428F-83BE-7E7BDE081518::net8.0::RiskManagement.Test.User.UserServiceTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::3D83AC15-B64D-428F-83BE-7E7BDE081518::net8.0::RiskManagement.Test.Project.ProjectServiceTests.GetAllProjectsService_AdminWithProjects_ReturnsProjectList&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::3D83AC15-B64D-428F-83BE-7E7BDE081518::net8.0::RiskManagement.Test.Project.ProjectServiceTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::3D83AC15-B64D-428F-83BE-7E7BDE081518::net8.0::RiskManagement.Test.Report.ReportServiceTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::3D83AC15-B64D-428F-83BE-7E7BDE081518::net8.0::RiskManagement.Test.Solution.SolutionServiceTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
