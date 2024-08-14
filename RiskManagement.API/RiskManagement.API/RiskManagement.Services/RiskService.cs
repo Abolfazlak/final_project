@@ -648,6 +648,13 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
 
     private bool CheckAccessToProject(HttpContext httpContext, long projectId, out ResponseMessage<string>? responseMessage)
     {
+        var isAdmin = userService.GetIsAdminFromHttpContext(httpContext);
+        if (isAdmin)
+        {
+            responseMessage = null;
+            return false;
+        }
+        
         var userId = userService.GetUserIdFromHttpContext(httpContext);
         var permission = repo.CheckProjectAccess(userId, projectId).Result;
 
@@ -669,6 +676,13 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
     private bool CheckAccessToProjectByRisk(HttpContext httpContext, long riskId, 
         out ResponseMessage<string>? responseMessage)
     {
+        var isAdmin = userService.GetIsAdminFromHttpContext(httpContext);
+        if (isAdmin)
+        {
+            responseMessage = null;
+            return false;
+        }
+        
         var userId = userService.GetUserIdFromHttpContext(httpContext);
         var permission = repo.CheckProjectAccessByRiskId(userId, riskId).Result;
 

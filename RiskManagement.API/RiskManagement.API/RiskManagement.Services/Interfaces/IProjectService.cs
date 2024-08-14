@@ -5,7 +5,7 @@ namespace RiskManagement.API.RiskManagement.Services.Interfaces;
 
 public interface IProjectService
 {
-    public Task<ResponseMessage<List<ProjectDto>>> GetAllProjectsService(HttpContext httpContext);
+    public Task<ResponseMessage<List<ProjectWithAssigneeDto>>> GetAllProjectsService(HttpContext httpContext);
     public Task<ResponseMessage<string>> CreateProjectService(CreateProjectDto dto, HttpContext httpContext);
     public Task<ResponseMessage<ProjectWithAssigneeDto>> GetProjectByIdService(long id);
     public Task<ResponseMessage<string>> UpdateProjectService(UpdateProjectDto dto, HttpContext httpContext);

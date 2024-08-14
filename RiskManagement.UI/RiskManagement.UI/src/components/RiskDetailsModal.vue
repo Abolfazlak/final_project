@@ -16,19 +16,19 @@ function closeModalOutside(event) {
 
 <template>
   <Transition name="modal">
-    <div v-if="show" class="modal-mask" ref="modalRef" @click="closeModalOutside">
-      <div class="modal-container md:w-1/3 max-h-50 rounded-lg">
-        <div class="modal-header">
+    <div v-if="show" class="r-modal-mask" ref="modalRef" @click="closeModalOutside">
+      <div class="r-modal-container overflow-auto md:w-1/2 max-h-50 rounded-lg">
+        <div class="r-modal-header">
           <slot name="header"></slot>
      
         </div>
 
-        <div class="modal-body ">
-            <slot class="" name="body"></slot>
+        <div class="r-modal-body">
+            <slot name="body"></slot>
       
         </div>
 
-        <div class="modal-footer">
+        <div class="r-modal-footer">
           <slot name="footer">
         
     
@@ -40,7 +40,7 @@ function closeModalOutside(event) {
 </template>
 
 <style scoped>
-.modal-mask {
+.r-modal-mask {
   position: fixed;
   z-index: 1000;
   top: 0;
@@ -52,7 +52,7 @@ function closeModalOutside(event) {
   transition: opacity 0.3s ease;
 }
 
-.modal-container {
+.r-modal-container {
 
   margin: auto;
   padding: 20px 30px;
@@ -63,17 +63,17 @@ function closeModalOutside(event) {
   direction: rtl;
 }
 
-.modal-header h3 {
+.mr-odal-header h3 {
   margin-top: 0;
 }
 
-.modal-body {
+.r-modal-body {
   margin: 10px 0;
   padding-top: 20px;
   border-top: 1px solid rgba(181, 181, 181, 0.498);
 }
 
-.modal-default-button {
+.r-modal-default-button {
   float: right;
 }
 
@@ -86,16 +86,16 @@ function closeModalOutside(event) {
  * these styles.
  */
 
-.modal-enter-from {
+.r-modal-enter-from {
   opacity: 0;
 }
 
-.modal-leave-to {
+.r-modal-leave-to {
   opacity: 0;
 }
 
-.modal-enter-from .modal-container,
-.modal-leave-to .modal-container {
+.r-modal-enter-from .r-modal-container,
+.r-modal-leave-to .r-modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }

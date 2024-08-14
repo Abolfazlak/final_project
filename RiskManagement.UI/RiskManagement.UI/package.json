@@ -14,8 +14,10 @@
     "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
     "pinia": "^2.1.7",
+    "toastify-js": "^1.12.0",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue3-toastify": "^0.2.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.3.3",

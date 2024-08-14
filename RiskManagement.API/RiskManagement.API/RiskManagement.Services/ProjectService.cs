@@ -8,7 +8,7 @@ namespace RiskManagement.API.RiskManagement.Services;
 
 public class ProjectService(IProjectRepo projectRepo, IUserService userService) : IProjectService
 {
-    public async Task<ResponseMessage<List<ProjectDto>>> GetAllProjectsService(HttpContext httpContext)
+    public async Task<ResponseMessage<List<ProjectWithAssigneeDto>>> GetAllProjectsService(HttpContext httpContext)
     {
         try
         {
@@ -21,23 +21,24 @@ public class ProjectService(IProjectRepo projectRepo, IUserService userService) 
 
                 if (res.Count == 0)
                 {
-                    return new ResponseMessage<List<ProjectDto>>
+                    return new ResponseMessage<List<ProjectWithAssigneeDto>>
                     {
                         Code = 404,
                         Content = []
                     };
                 }
 
-                return new ResponseMessage<List<ProjectDto>>
+                return new ResponseMessage<List<ProjectWithAssigneeDto>>
                 {
                     Code = 200,
                     Content =
-                        res.Select(p => new ProjectDto
+                        res.Select(p => new ProjectWithAssigneeDto
                         {
                             Id = p.Id,
                             ProjectName = p.ProjectName,
                             Methodology = p.Methodology,
-                            Description = p.Description
+                            Description = p.Description,
+                            UserDto = userService.GetUserByIdService(p.AssigneeUserId).Result.Content
                         }).ToList()
                 };
             }
@@ -47,29 +48,30 @@ public class ProjectService(IProjectRepo projectRepo, IUserService userService) 
 
             if (res.Count == 0)
             {
-                return new ResponseMessage<List<ProjectDto>>
+                return new ResponseMessage<List<ProjectWithAssigneeDto>>
                 {
                     Code = 404,
                     Content = []
                 };
             }
 
-            return new ResponseMessage<List<ProjectDto>>
+            return new ResponseMessage<List<ProjectWithAssigneeDto>>
             {
                 Code = 200,
                 Content =
-                    res.Select(p => new ProjectDto
+                    res.Select(p => new ProjectWithAssigneeDto
                     {
                         Id = p.Id,
                         ProjectName = p.ProjectName,
                         Methodology = p.Methodology,
-                        Description = p.Description
+                        Description = p.Description,
+                        UserDto = userService.GetUserByIdService(p.AssigneeUserId).Result.Content
                     }).ToList()
             };
         }
         catch (Exception e)
         {
-            return new ResponseMessage<List<ProjectDto>>
+            return new ResponseMessage<List<ProjectWithAssigneeDto>>
             {
                 Code = 500,
                 Content = []
@@ -108,6 +110,7 @@ public class ProjectService(IProjectRepo projectRepo, IUserService userService) 
     public async Task<ResponseMessage<ProjectWithAssigneeDto>> GetProjectByIdService(long id)
     {
         var project = await projectRepo.GetProjectById(id);
+        
         if (project == null)
         {
             return new ResponseMessage<ProjectWithAssigneeDto>

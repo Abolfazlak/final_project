@@ -13,11 +13,11 @@ public class UserModule : CarterModule
         app.MapPost("/users/registerAdmin", async (IUserService service, 
             ICommonHelper helper, AddAdminUserDto dto) =>
         {
-            var isMobileValid = helper.ValidateMobileNumber(dto.PhoneNumber);
-            if (!isMobileValid)
-            {
-                return Results.BadRequest(new { Message = "ساختار شماره همراه اشتباه است!" });
-            }
+            // var isMobileValid = helper.ValidateMobileNumber(dto.PhoneNumber);
+            // if (!isMobileValid)
+            // {
+            //     return Results.BadRequest(new { Message = "ساختار شماره همراه اشتباه است!" });
+            // }
             var isPasswordValid = helper.ValidatePassword(dto.Password);
             if (!isPasswordValid)
             {
@@ -53,9 +53,9 @@ public class UserModule : CarterModule
             var res = await service.Login(model);
             return res.Code switch
             {
-                200 => Results.Ok(new { Token = res.Content }),
+                200 => Results.Ok(new {Data = res.Content}),
                 401 => Results.Unauthorized(),
-                _  => Results.Problem(res.Content)
+                _  => Results.Problem(res.Content?.Token)
             };
         });
         

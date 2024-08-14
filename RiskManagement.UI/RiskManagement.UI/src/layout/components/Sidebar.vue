@@ -1,7 +1,8 @@
 <template>
   <v-card
     class="absolute p-4 top-24  right-4 bottom-0"
-    max-width="400"
+    max-width="600px"
+    width="300px"
   >
     <v-list density="compact">
       <v-list-subheader>REPORTS</v-list-subheader>

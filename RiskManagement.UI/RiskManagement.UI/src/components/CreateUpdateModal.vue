@@ -17,7 +17,7 @@ function closeModalOutside(event) {
 <template>
   <Transition name="modal">
     <div v-if="show" class="modal-mask" ref="modalRef" @click="closeModalOutside">
-      <div class="modal-container md:w-1/3 max-h-50 rounded-lg">
+      <div class="modal-container md:w-1/2 max-h-50 rounded-lg">
         <div class="modal-header">
           <slot name="header"></slot>
      

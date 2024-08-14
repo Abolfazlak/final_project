@@ -20,9 +20,6 @@ public class AddUserDto
     [EmailAddress]
     public string Email { get; set; }
     
-    [Required]
-    [RegularExpression(@"^09\d{9}$", ErrorMessage = "Mobile number must start with 09 and be 11 digits long.")]
-    public string PhoneNumber { get; set; }
 }
 public class AddAdminUserDto : AddUserDto
 {

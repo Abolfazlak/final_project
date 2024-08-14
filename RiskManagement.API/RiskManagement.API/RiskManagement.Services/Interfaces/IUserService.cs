@@ -7,7 +7,7 @@ public interface IUserService
 {
     public Task<ResponseMessage<string>> RegisterAdmin(AddAdminUserDto dto);
     public Task<ResponseMessage<string>> RegisterUser(AddUserDto dto, long companyId);
-    public Task<ResponseMessage<string>> Login(LoginModel model);
+    public Task<ResponseMessage<LoginOutputDto>> Login(LoginModel model);
     public Task<ResponseMessage<List<UserDto>>> GetAllUsersService(HttpContext httpContext);
     public Task<ResponseMessage<UserDto>> GetUserByIdService(long? id);
     

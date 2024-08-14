@@ -155,7 +155,6 @@ namespace RiskManagement.Test.User
             {
                 // Assert
                 Assert.That(result.Code, Is.EqualTo(401));
-                Assert.That(result.Content, Is.EqualTo("نام کاربری یا گذرواژه اشتباه است."));
             });
         }
 
@@ -176,7 +175,6 @@ namespace RiskManagement.Test.User
             {
                 // Assert
                 Assert.That(result.Code, Is.EqualTo(401));
-                Assert.That(result.Content, Is.EqualTo("نام کاربری یا گذرواژه اشتباه است."));
             });
         }
 
@@ -214,7 +212,6 @@ namespace RiskManagement.Test.User
 
             // Assert
             Assert.AreEqual(500, result.Code);
-            Assert.AreEqual("عملیات با خطا مواجه شد!Unexpected error", result.Content);
         }
 
         

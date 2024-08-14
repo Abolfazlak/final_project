@@ -96,17 +96,21 @@ public class UserService(ICommonHelper helper, IUserRepo userRepo) : IUserServic
         
     }
 
-    public async Task<ResponseMessage<string>> Login(LoginModel model)
+    public async Task<ResponseMessage<LoginOutputDto>> Login(LoginModel model)
     {
         try
         {
             var user = await userRepo.GetUserByUserName(model.Username);
             if (user == null)
             {
-                return new ResponseMessage<string>
+                return new ResponseMessage<LoginOutputDto>
                 {
                     Code = 401,
-                    Content = "نام کاربری یا گذرواژه اشتباه است."
+                    Content = new LoginOutputDto
+                    {
+                        Token =  "نام کاربری یا گذرواژه اشتباه است.",
+                        IsAdmin = false
+                    }
                 };
             }
 
@@ -114,28 +118,41 @@ public class UserService(ICommonHelper helper, IUserRepo userRepo) : IUserServic
 
             if (!checkPass)
             {
-                return new ResponseMessage<string>
+                return new ResponseMessage<LoginOutputDto>
                 {
                     Code = 401,
-                    Content = "نام کاربری یا گذرواژه اشتباه است."
+                    Content = new LoginOutputDto
+                    {
+                        Token =  "نام کاربری یا گذرواژه اشتباه است.",
+                        IsAdmin = false
+                    }
                 };
             }
 
             var token = helper.GenerateAccessToken(user.Id, user.IsAdmin, user.CompanyId);
         
-            return new ResponseMessage<string>
+            return new ResponseMessage<LoginOutputDto>
             {
                 Code = 200,
-                Content = new JwtSecurityTokenHandler().WriteToken(token)
+                Content = new LoginOutputDto
+                {
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    IsAdmin = user.IsAdmin
+                }
+                
             };
 
         }
         catch (Exception e)
         {
-            return new ResponseMessage<string>
+            return new ResponseMessage<LoginOutputDto>
             {
                 Code = 500,
-                Content = "عملیات با خطا مواجه شد!" + e.Message
+                Content = new LoginOutputDto
+                {
+                    Token =  "عملیات با خطا مواجه شد!" + e.Message,
+                    IsAdmin = false
+                }
             };
         }
         
@@ -254,7 +271,7 @@ public class UserService(ICommonHelper helper, IUserRepo userRepo) : IUserServic
             Password = pass,
             FullName = dto.FullName,
             Email = dto.Email,
-            PhoneNumber = dto.PhoneNumber,
+            PhoneNumber = " ",
             IsAdmin = true,
             CompanyId = company!.Id,
             IsActive = true
@@ -270,7 +287,7 @@ public class UserService(ICommonHelper helper, IUserRepo userRepo) : IUserServic
             Password = pass,
             FullName = dto.FullName,
             Email = dto.Email,
-            PhoneNumber = dto.PhoneNumber,
+            PhoneNumber = " ",
             IsAdmin = false,
             CompanyId = companyId,
             IsActive = true

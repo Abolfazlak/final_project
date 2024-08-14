@@ -6,19 +6,30 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component:() => import('@/views/panel/Index.vue'),
-      meta: {
-        layout: PanelLayout
-      }
-    },
-    {
-      path: '/login',
-      name: 'login',
+      name: 'landing',
       component:() => import('@/views/landing/Index.vue'),
       meta: {
         layout: DefaultLayout
       }
+    },
+    {
+      path: '/projects',
+      name: 'projects',
+      component:() => import('@/views/projects/Index.vue'),
+      meta: {
+        layout: DefaultLayout
+      }
+    },
+
+    {
+      path: '/risks/:id',
+      name: 'risks',
+      component:() => import('@/views/risk/Index.vue'),
+      meta: {
+        layout: PanelLayout
+      },
+     
+
     }
   ]
 })

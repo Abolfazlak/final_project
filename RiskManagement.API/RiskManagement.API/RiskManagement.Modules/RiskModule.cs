@@ -72,7 +72,7 @@ public class RiskModule : CarterModule
             };
         });
         
-        app.MapPost("/risk/getAllRisksByProjectId", [Authorize] async (IRiskService service, 
+        app.MapGet("/risk/getAllRisksByProjectId", [Authorize] async (IRiskService service, 
             HttpContext httpContext, 
             long id) =>
         {

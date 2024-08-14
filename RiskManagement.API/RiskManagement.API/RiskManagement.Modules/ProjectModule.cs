@@ -77,5 +77,16 @@ public class ProjectModule : CarterModule
                 _  => Results.Problem("عملیات با خطا مواجه شد")
             };
         });
+        
+        app.MapGet("/project/getProjectMethodologyById", [Authorize] async (IProjectService service, long id) =>
+        {
+            var res = await service.GetProjectByIdService(id);
+            return res.Code switch
+            {
+                200 => Results.Ok(new { Data = res.Content?.Methodology }),
+                404 => Results.NotFound(),
+                _  => Results.Problem("عملیات با خطا مواجه شد")
+            };
+        });
     }
 }
