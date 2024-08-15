@@ -163,8 +163,18 @@ public class RiskRepo(RiskManagementDbContext context) : IRiskRepo
     
     public async Task UpdateRiskDetail(RiskDetails riskDetails)
     {
-        context.RiskDetails.Update(riskDetails);
-        await context.SaveChangesAsync();
+        try
+        {
+            context.RiskDetails.Update(riskDetails);
+            context.SaveChanges();
+            await context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
     }
     
     public async Task RemoveRiskDetails(RiskDetails risk)
@@ -176,7 +186,7 @@ public class RiskRepo(RiskManagementDbContext context) : IRiskRepo
         
     public async Task<RiskDetails?> GetFullRiskDetailById(long id)
     {
-        var details = await context.RiskDetails.FirstOrDefaultAsync(rd => rd.RiskId == id);
+        var details = await context.RiskDetails.FirstOrDefaultAsync(rd => rd.Id == id);
         return details;
     }
     public async Task<RiskDetailUpdateDto?> GetRiskDetailById(long id)

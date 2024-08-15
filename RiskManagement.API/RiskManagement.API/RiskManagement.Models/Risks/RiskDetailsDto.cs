@@ -16,7 +16,6 @@ public class RiskDetailsDto
     
     public string? Document { get; set; }
     public DateTime EstimatedDateTime { get; set; }
-    
     public long RiskId { get; set; }
 }
 

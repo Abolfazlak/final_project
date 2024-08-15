@@ -1,5 +1,6 @@
 using Carter;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RiskManagement.API.RiskManagement.Models.Risks;
 using RiskManagement.API.RiskManagement.Services.Interfaces;
 
@@ -10,7 +11,7 @@ public class RiskModule : CarterModule
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
 
-        app.MapPost("/risk/getMainRiskCategories", [Authorize] async (IRiskService service) =>
+        app.MapGet("/risk/getMainRiskCategories", [Authorize] async (IRiskService service) =>
         {
             var res = await service.GetMainRiskCategories();
             return res.Code switch
@@ -22,7 +23,7 @@ public class RiskModule : CarterModule
             };
         });
         
-        app.MapPost("/risk/getSecondaryRiskCategories", [Authorize] async (IRiskService service, int id) =>
+        app.MapGet("/risk/getSecondaryRiskCategories", [Authorize] async (IRiskService service, int id) =>
         {
             var res = await service.GetSecondaryRiskCategories(id);
             return res.Code switch
@@ -102,7 +103,7 @@ public class RiskModule : CarterModule
         
         app.MapPost("/risk/detail/updateRiskDetail", [Authorize] async (IRiskService service, 
             HttpContext httpContext, 
-            RiskDetailUpdateDto dto) =>
+            [FromBody]RiskDetailUpdateDto dto) =>
         {
             var res = await service.UpdateRiskDetailService(httpContext, dto);
             return res.Code switch
@@ -113,7 +114,7 @@ public class RiskModule : CarterModule
             };
         });
         
-        app.MapPost("risk/detail/getRiskDetail", [Authorize] async (IRiskService service, 
+        app.MapGet("risk/detail/getRiskDetail", [Authorize] async (IRiskService service, 
             HttpContext httpContext, 
             long id) =>
         {

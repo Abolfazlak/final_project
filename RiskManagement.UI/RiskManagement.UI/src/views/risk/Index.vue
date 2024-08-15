@@ -1,76 +1,98 @@
 <template>
-  <v-card class="ml-24 mt-24">
-    <v-card-title class="d-flex align-center pe-2">
-      <div class="flex justify-between w-full pt-4 pb-16">
-        <div class="w-1/4 font-bold text-2xl mt-2">مدیریت ریسک های پروژه</div>
-        <div class="flex w-1/3">
-          <v-text-field
-            class="mt-2 h-16"
-            items-per-page="10"
-            v-model="search"
-            density="compact"
-            label="جستجو"
-            prepend-inner-icon="mdi-magnify"
-            variant="solo-filled"
-            flat
-            hide-details
-            single-line
-          ></v-text-field>
-          <v-btn class="mt-2 mr-4 px-6 ml-4 h-12" color="primary">ایجاد</v-btn>
+  <div class="w-full h-full pb-20">
+    <v-card class="ml-24 mt-24">
+      <v-card-title class="d-flex align-center pe-2">
+        <div class="flex justify-between w-full pt-4">
+          <div class="w-1/4 font-bold text-2xl mt-2">مدیریت ریسک های پروژه</div>
+          <div class="flex w-1/3">
+            <v-text-field
+              class="mt-2 h-16"
+              items-per-page="5"
+              v-model="search"
+              density="compact"
+              label="جستجو"
+              prepend-inner-icon="mdi-magnify"
+              variant="solo-filled"
+              flat
+              hide-details
+              single-line
+            ></v-text-field>
+            <v-btn class="mt-2 mr-4 px-6 ml-4 h-12" color="primary" @click="showCreateModal"
+              >ایجاد</v-btn
+            >
+          </div>
         </div>
-      </div>
-    </v-card-title>
-    <v-data-table
-    class="px-8"
-      v-model:search="search"
-      :headers="headers"
-      :items="serverItems"
-      :loading="loading"
-      item-value="id"
-      @update:options="loadItems"
-    >
-      <template v-slot:item.rowNumber="{ index }">
-        {{ index + 1 + itemsPerPage * (currentPage - 1) }}
-      </template>
-      <template v-slot:item.actions="{ item }">
-        <v-btn
-          @click="item.showBtn = !item.showBtn"
-          class="my-4"
-          density="default"
-          icon="mdi-format-list-bulleted"
-          color="info"
-        ></v-btn>
-        <v-list class="absolute z-50 mr-16 -mt-12 shadow-lg rounded-lg" v-if="item.showBtn">
-          <v-list-item><v-btn class="w-20" color="info">جزيیات</v-btn></v-list-item>
-          <v-list-item> <v-btn class="w-20" color="success">راه‌حل‌ها</v-btn></v-list-item>
-          <v-list-item> <v-btn class="w-20" color="warning"> ویرایش</v-btn></v-list-item>
-          <v-list-item> <v-btn class="w-20" color="red"> حذف</v-btn></v-list-item>
-        </v-list>
-      </template>
-    </v-data-table>
-  </v-card>
+      </v-card-title>
+      <v-data-table
+        class="px-8 pb-14"
+        v-model:search="search"
+        :headers="headers"
+        :items="serverItems"
+        :loading="loading"
+        item-value="id"
+        @update:options="loadItems"
+      >
+        <template v-slot:item.rowNumber="{ index }">
+          {{ index + 1 + itemsPerPage * (currentPage - 1) }}
+        </template>
+        <template v-slot:item.actions="{ item }">
+          <v-btn
+            @click="item.showBtn = !item.showBtn"
+            class="my-4"
+            density="default"
+            icon="mdi-format-list-bulleted"
+            color="info"
+          ></v-btn>
+          <v-list class="absolute z-50 mr-16 -mt-16 shadow-lg rounded-lg" v-if="item.showBtn">
+            <v-list-item
+              ><v-btn class="w-20" color="info" @click="showDetailsModal(item.id)"
+                >جزيیات</v-btn
+              ></v-list-item
+            >
+            <v-list-item> <v-btn class="w-20" color="success">راه‌حل‌ها</v-btn></v-list-item>
+            <v-list-item>
+              <v-btn class="w-20" color="warning" @click="showUpdateModal(item)">
+                ویرایش</v-btn
+              ></v-list-item
+            >
+            <v-list-item>
+              <v-btn class="w-20" color="red" @click="deleteRisk(item.id)"> حذف</v-btn></v-list-item
+            >
+          </v-list>
+        </template>
+      </v-data-table>
+    </v-card>
+  </div>
+
+  <create-risk :isCreateModalVisible="isCreateModalVisibleRef"></create-risk>
+  <update-risk :isUpdateModalVisible="isUpdateModalVisibleRef" :items="updateItems"></update-risk>
+  <risk-details :riskId="riskIdRef" :isDetailsModalVisible="isDetailsModalVisibleRef"></risk-details>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/store.js'
+import CreateRisk from './CreateRisk.vue'
+import UpdateRisk from './UpdateRisk.vue'
+import RiskDetails from './RiskDetails.vue'
+
+import { toast } from 'vue3-toastify'
 
 const user = useUserStore()
 const route = useRoute()
 
+const isCreateModalVisibleRef = ref(false)
+const isUpdateModalVisibleRef = ref(false)
+const isDetailsModalVisibleRef = ref(false)
+
 const token = JSON.parse(localStorage.getItem('token'))
 const search = ref('')
-const itemsPerPage = ref(10)
+const itemsPerPage = ref(5)
 const currentPage = ref(1)
 
 const headers = [
-{
-    title: 'ردیف',
-    align: 'start',
-    sortable: false,
-    key: 'rowNumber'
-  },
+  { title: 'ردیف', align: 'start', sortable: false, key: 'rowNumber' },
   { title: 'عنوان ریسک', key: 'title', align: 'start' },
   { title: 'گروه ریسک', key: 'mainRiskCategory.title', align: 'start' },
   { title: 'دسته‌بندی ریسک', key: 'secondaryRiskCategory.title', align: 'start' },
@@ -79,11 +101,40 @@ const headers = [
 const serverItems = ref([])
 const loading = ref(true)
 const totalItems = ref(0)
+const updateItems = ref(null)
+const riskIdRef = ref(0)
 
 const loadItems = ({ page, itemsPerPage, sortBy }) => {
-  currentPage.value = page  // Track the current page
+  currentPage.value = page // Track the current page
   loading.value = true
   getAllRisks(route.params.id)
+}
+
+function showCreateModal() {
+  user.createRiskModal = true
+  isCreateModalVisibleRef.value = true
+}
+
+function showUpdateModal(item) {
+  user.isFirstGetCategory = false
+  user.updateRiskModal = true
+  isUpdateModalVisibleRef.value = true
+  user.riskUpdateItems = item
+  updateItems.value = item
+}
+
+function showDetailsModal(id) {
+  user.riskDetailsModal = true
+  isDetailsModalVisibleRef.value = true
+  riskIdRef.value = id
+}
+
+function loader() {
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(loadItems({ page: 1, itemsPerPage: itemsPerPage.value }))
+    }, 1200)
+  })
 }
 
 const getAllRisks = async (id) => {
@@ -105,9 +156,65 @@ const getAllRisks = async (id) => {
   }
 }
 
+const deleteRisk = async (id) => {
+  const url = `${user.url}risk/deleteRisk?id=${id}`
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    })
+    const response = await res.json()
+    toast.success(response.data)
+    loadItems({ page: 1, itemsPerPage: itemsPerPage.value })
+  } catch (error) {
+    toast.error(error.message)
+    console.log('response-deleteRisk', error)
+  }
+}
+
 onMounted(() => {
   loadItems({ page: 1, itemsPerPage: itemsPerPage.value })
 })
+
+watch(
+  () => user.createRiskModal,
+  async (newval) => {
+    isCreateModalVisibleRef.value = newval
+    if (newval == false) {
+      loader()
+    }
+  }
+)
+
+watch(
+  () => user.updateRiskModal,
+  async (newval) => {
+    isUpdateModalVisibleRef.value = newval
+    if (newval == false) {
+      loader()
+    }
+  }
+)
+
+watch(
+  () => user.riskDetailsModal,
+  async (newval) => {
+    isDetailsModalVisibleRef.value = newval
+    if (newval == false) {
+      loader()
+    }
+  }
+)
+
+watch(
+  () => user.riskUpdateItems,
+  async (newval) => {
+    updateItems.value = newval
+  }
+)
 </script>
 
 <style>
@@ -121,7 +228,7 @@ onMounted(() => {
   margin-top: 30px;
   direction: ltr;
 }
-.v-data-table-header__content span{
+.v-data-table-header__content span {
   font-weight: bold;
   font-size: large;
 }

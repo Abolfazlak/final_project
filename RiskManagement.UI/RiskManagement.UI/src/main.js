@@ -12,6 +12,8 @@ import '@mdi/font/css/materialdesignicons.css'
 import './app.css'
 import Vue3Toastify from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import Vue3PersianDatetimePicker from 'vue3-persian-datetime-picker'
+
 
 const app = createApp(App)
 
@@ -30,6 +32,21 @@ app.use(
       pauseOnHover: true
     }
   );
+  
+  app.component('DatePicker', Vue3PersianDatetimePicker)
 
+  app.use(Vue3PersianDatetimePicker, {
+    name: 'CustomDatePicker',
+    props: {
+      format: 'YYYY-MM-DD HH:mm',
+      displayFormat: 'jYYYY-jMM-jDD HH:mm',
+      editable: true,
+      inputClass: 'form-control my-custom-class-name',
+      placeholder: 'تاریخ',
+      altFormat: 'YYYY-MM-DD HH:mm',
+      color: '#1867c0',
+      autoSubmit: false,
+    }
+  })
 
 app.mount('#app')

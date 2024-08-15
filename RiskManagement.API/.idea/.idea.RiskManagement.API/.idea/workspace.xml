@@ -9,44 +9,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5047cee-2883-45cb-8a0f-d83a92f75164" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Models/Users/LoginOutputDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RiskManagement.API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RiskManagement.API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Models/Users/AddAdminUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Models/Users/AddAdminUserDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/ProjectModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/ProjectModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Models/Risks/RiskDetailsDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Models/Risks/RiskDetailsDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/RiskModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/RiskModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/UserModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/UserModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/Interfaces/IProjectService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/Interfaces/IProjectService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/Interfaces/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/ProjectService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/ProjectService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Repositories/RiskRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Repositories/RiskRepo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/RiskService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/RiskService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/UserService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/ref/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/ref/RiskManagement.API.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/refint/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/refint/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/User/UserServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/User/UserServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/components/Modal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/components/Modal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/layout/PanelLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/layout/PanelLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/layout/components/NavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/layout/components/NavBar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/layout/components/Sidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/layout/components/Sidebar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/stores/counter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/landing/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/landing/Index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +168,7 @@
       <workItem from="1722457319782" duration="90482000" />
       <workItem from="1723312545736" duration="1120000" />
       <workItem from="1723380140146" duration="5632000" />
-      <workItem from="1723488185939" duration="10020000" />
+      <workItem from="1723488185939" duration="32125000" />
     </task>
     <task id="LOCAL-00001" summary="initial backend project">
       <option name="closed" value="true" />
@@ -300,6 +280,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/RiskService.cs</url>
+          <line>570</line>
+          <properties documentPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/RiskService.cs" initialLine="570" containingFunctionPresentation="Method 'UpdateRiskDetailService'">
+            <startOffsets>
+              <option value="16499" />
+            </startOffsets>
+            <endOffsets>
+              <option value="16588" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/RiskManagement.API/RiskManagement.Repositories/RiskRepo.cs</url>
+          <line>172</line>
+          <properties documentPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Repositories/RiskRepo.cs" initialLine="172" containingFunctionPresentation="Method 'UpdateRiskDetail'">
+            <startOffsets>
+              <option value="5319" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5340" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

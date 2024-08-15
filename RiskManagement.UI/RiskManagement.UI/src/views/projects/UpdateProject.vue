@@ -89,7 +89,6 @@ const isUpdateModalVisibleRef = ref(props.isUpdateModalVisible)
 const updateItems = ref(props.items)
 
 const methodologies = ['agile', 'rup']
-const userItems = [1, 2, 3, 4]
 
 let token = JSON.parse(localStorage.getItem('token'))
 

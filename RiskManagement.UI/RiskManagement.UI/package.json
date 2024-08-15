@@ -13,14 +13,20 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
+    "jalali-moment": "^3.3.11",
+    "moment": "^2.30.1",
+    "moment-jalaali": "^0.10.1",
     "pinia": "^2.1.7",
     "toastify-js": "^1.12.0",
     "vue": "^3.4.21",
+    "vue-jalali-moment": "^1.0.0",
     "vue-router": "^4.3.0",
+    "vue3-persian-datetime-picker": "^1.2.2",
     "vue3-toastify": "^0.2.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.3.3",
+    "@types/moment-jalaali": "^0.7.9",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-prettier": "^8.0.0",
     "autoprefixer": "^10.4.20",

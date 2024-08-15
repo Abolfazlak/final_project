@@ -8,8 +8,12 @@ export const useUserStore = defineStore("user", {
     user: {
 
     },
-
+    isFirstGetCategory: false,
+    riskUpdateItems: null,
     updateItems: null,
+    createRiskModal: false,
+    riskDetailsModal: false,
+    updateRiskModal: false,
     createProjectModal: false,
     updateProjectModal: false,
     url: "http://localhost:5151/",

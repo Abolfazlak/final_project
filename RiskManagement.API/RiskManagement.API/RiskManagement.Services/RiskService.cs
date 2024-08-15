@@ -517,8 +517,32 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
             {
                 return responseMessage!;
             }
-            
-            const string documentUrl = "";
+            var documentUrl = "";
+
+            if (!string.IsNullOrEmpty(riskDetails.Document))
+            {
+                // Determine the file type based on the front end or base64 string
+                const string fileExtension = ".zip"; // Default to .pdf
+
+                // Define the file name with the appropriate extension
+                var fileName = $"{Guid.NewGuid()}{fileExtension}";
+
+                // Define the path to the "project-documents" folder on the desktop
+                var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var folderPath = Path.Combine(desktopPath, "project-documents");
+                var filePath = Path.Combine(folderPath, fileName);
+
+                // Ensure the directory exists
+                Directory.CreateDirectory(folderPath);
+
+                // Decode the base64 string and save the file to the specified path
+                var fileBytes = Convert.FromBase64String(riskDetails.Document);
+                await File.WriteAllBytesAsync(filePath, fileBytes);
+
+                // Store the file path in the DTO (or save to DB as needed)
+                documentUrl = filePath;
+            }
+
             var createRisk = CreateRiskDetails(riskDetails, documentUrl);
 
             await repo.AddRiskDetailToDb(createRisk);
@@ -549,7 +573,32 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
                 return responseMessage!;
             }
             
-            const string documentUrl = "";
+            var documentUrl = "";
+
+            if (!string.IsNullOrEmpty(riskDetails.Document) && !riskDetails.Document.StartsWith("/Users"))
+            {
+                // Determine the file type based on the front end or base64 string
+                const string fileExtension = ".zip"; // Default to .pdf
+
+                // Define the file name with the appropriate extension
+                var fileName = $"{Guid.NewGuid()}{fileExtension}";
+
+                // Define the path to the "project-documents" folder on the desktop
+                var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var folderPath = Path.Combine(desktopPath, "project-documents");
+                var filePath = Path.Combine(folderPath, fileName);
+
+                // Ensure the directory exists
+                Directory.CreateDirectory(folderPath);
+
+                // Decode the base64 string and save the file to the specified path
+                var fileBytes = Convert.FromBase64String(riskDetails.Document);
+                await File.WriteAllBytesAsync(filePath, fileBytes);
+
+                // Store the file path in the DTO (or save to DB as needed)
+                documentUrl = filePath;
+            }
+
             var riskDetail = await repo.GetFullRiskDetailById(riskDetails.Id);
 
             if (riskDetail == null)
@@ -565,7 +614,7 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
             riskDetail.RiskProbability = riskDetails.RiskProbability;
             riskDetail.RiskImpact = riskDetails.RiskImpact;
             riskDetail.RiskScore = !riskDetails.IsOpportunity ? riskDetails.RiskProbability * riskDetails.RiskImpact : 0;
-            riskDetail.DocumentUrl = documentUrl;
+            riskDetail.DocumentUrl = riskDetails.Document.StartsWith("/Users") ? riskDetail.DocumentUrl : documentUrl;
             riskDetail.IsOpportunity = riskDetails.IsOpportunity;
             riskDetail.OpportunityImpact = riskDetails.OpportunityImpact;
             riskDetail.OpportunityProbability = riskDetails.OpportunityProbability;
