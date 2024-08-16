@@ -4,14 +4,14 @@
       <img class="Navbar-Right-Logo" src="/logo.png" alt="logo" />
       <div class="Navbar-Right-title">سامانه مدیریت ریسک راسا</div>
     </div>
-    <div class="Navbat-Left" v-if="token || loginResRef">
+    <div class="Navbat-Left" v-if="token || loginResRef" @click="showEditProfile">
       <svg :style="{ width: '32px', height: '32px', color: 'black' }" viewBox="0 0 28 28">
         <path :d="mdiAccount" />
       </svg>
 
-      <div class="loginBtn" @click="logoutFunc">ابوالفضل اخوی ثمرین</div>
+      <div class="loginBtn">{{ user.user.fullName }}</div>
     </div>
-    <div  v-else class="Navbat-Left">
+    <div v-else class="Navbat-Left">
       <svg :style="{ width: '32px', height: '32px', color: 'black' }" viewBox="0 0 28 28">
         <path :d="mdiAccount" />
       </svg>
@@ -140,6 +140,73 @@
       </div>
     </template>
   </modal>
+
+  <modal :show="isProfileModalVisibleRef" @close="closeUpdateModal" class="">
+    <template v-slot:header>
+      <div class="font-bold text-base">پروفایل کاربری</div>
+    </template>
+
+    <template v-slot:body v-if="!isRegisterForm">
+      <div class="">
+        <v-container class="mt-4">
+          <v-locale-provider rtl>
+            <v-form ref="updateFormRef">
+              <v-text-field
+                v-model="userProfile.userName"
+                label="نام کاربری"
+                variant="outlined"
+                rounded="lg"
+                disabled
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="userProfile.fullName"
+                class="mt-2"
+                label="نام و نام خانوادگی"
+                variant="outlined"
+                rounded="lg"
+                :rules="[fullnameRule.required]"
+              ></v-text-field>
+              <v-text-field
+                v-model="userProfile.email"
+                class="mt-2"
+                label="ایمیل سازمانی"
+                variant="outlined"
+                rounded="lg"
+                type="email"
+                :rules="emailRule"
+              ></v-text-field>
+            </v-form>
+          </v-locale-provider>
+        </v-container>
+      </div>
+    </template>
+    <template v-slot:footer>
+      <v-row class="flex text-center items-center justify-center mt-8 px-3 gap-5 mb-1">
+        <v-btn
+          class="flex w-1.1/2 py-6 text-center items-center"
+          color="primary"
+          rounded="lg"
+          @click="submitUpdateForm"
+          >ویرایش</v-btn
+        >
+        <v-btn
+          class="flex w-1.1/2 py-6 text-center items-center"
+          color="red"
+          rounded="lg"
+          @click="closeUpdateModal"
+          >انصراف</v-btn
+        >
+      </v-row>
+      <v-btn
+          class="flex w-full py-6 text-center items-center mt-6"
+          color="red"
+          rounded="lg"
+          @click="logoutFunc"
+          >خروج از حساب کاربری</v-btn
+        >
+    </template>
+  </modal>
 </template>
 
 <script setup>
@@ -147,28 +214,36 @@ import { mdiAccount, mdiLogout } from '@mdi/js'
 import modal from '@/components/Modal.vue'
 import { reactive, ref, watch, onMounted } from 'vue'
 import { useUserStore } from '@/stores/store.js'
-import { toast } from 'vue3-toastify'
 
 import { useRouter } from 'vue-router'
+import { toast } from 'vue3-toastify'
 
 onMounted(() => {
   token.value = localStorage.getItem('token')
+  if (token.value) {
+    user.GetUser()
+  }
 })
 
 const router = useRouter()
 
 const user = useUserStore()
 
-const props = defineProps(['isLoginModalVisible'])
+const props = defineProps(['isLoginModalVisible', 'isProfileModalVisible'])
 const emit = defineEmits('click', 'closeLoginModal')
 
 const loginFormRef = ref(null) // Add ref to access v-form
 const registerFormRef = ref(null)
+const updateFormRef = ref(null)
+
+const userProfile = ref(user.user)
+
 const token = ref(null)
 const loginResRef = ref(user.loginRes)
 
-
 const isLoginModalVisibleRef = ref(props.isLoginModalVisible)
+const isProfileModalVisibleRef = ref(props.isProfileModalVisible)
+
 const isRegisterForm = ref(false)
 
 const loginModel = reactive({ username: '', password: '' })
@@ -227,6 +302,10 @@ function closeLoginModal() {
   isRegisterForm.value = false
 }
 
+function closeUpdateModal() {
+  isProfileModalVisibleRef.value = false
+}
+
 function showLoginModalFunc() {
   isLoginModalVisibleRef.value = true
 }
@@ -239,15 +318,32 @@ function loginBtnClicked() {
   isRegisterForm.value = false
 }
 
-function logoutFunc(){
+function logoutFunc() {
+  closeUpdateModal()
   user.loginRes = false
   user.Logout()
+}
+
+function showEditProfile() {
+  isProfileModalVisibleRef.value = true
+  console.log(userProfile.value)
 }
 
 function submitRegisterForm() {
   registerFormRef.value?.validate().then(async ({ valid: isValid }) => {
     if (isValid) {
       await user.Register(registerModel)
+    } else {
+    }
+  })
+}
+
+function submitUpdateForm() {
+  updateFormRef.value?.validate().then(async ({ valid: isValid }) => {
+    if (isValid) {
+      await user.Update(userProfile.value)
+      closeUpdateModal()
+      toast.success('.اطلاعات کاربر با موفقیت ویرایش شد')
     } else {
     }
   })
@@ -283,6 +379,14 @@ watch(
   () => user.loginRes,
   async (newval, oldval) => {
     loginResRef.value = newval
+    console.log(newval)
+  }
+)
+
+watch(
+  () => user.user,
+  async (newval, oldval) => {
+    userProfile.value = newval
   }
 )
 </script>
@@ -297,10 +401,10 @@ watch(
   padding: 0 10px;
   padding-top: 10px;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
 }
 
-.Navbar-Right{
+.Navbar-Right {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -312,10 +416,10 @@ watch(
   cursor: pointer;
 }
 
-.Navbar-Right-title{
+.Navbar-Right-title {
   font-family: 'Yekan-Bakh-Fat';
   font-size: 25px;
-  color: #1A2731;
+  color: #1a2731;
 }
 .Navbat-Left {
   display: flex;
@@ -331,14 +435,13 @@ watch(
   transition: 0.5s;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-.Navbat-Left:hover{
-  background: #1A2731;
+.Navbat-Left:hover {
+  background: #1a2731;
   cursor: pointer;
   transition: 0.5s;
-  color: #F6F6F6;
-
+  color: #f6f6f6;
 }
-.loginBtn{
+.loginBtn {
   display: flex;
 }
 

@@ -9,12 +9,21 @@ import Sidebar from '@/layout/components/Sidebar.vue'
     <div class="flex ">
         <Sidebar  />
         <div class="flex  w-full">
-            <div class="w-1/4 mt-4"></div>
-            <RouterView class="w-3/4 "/>
+            <div class="empty-layout mt-2"></div>
+            <RouterView class="main-layout"/>
         </div>
   
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.empty-layout{
+  width: 2vw;
+}
+
+.main-layout{
+  width: 98vw;
+}
+</style>

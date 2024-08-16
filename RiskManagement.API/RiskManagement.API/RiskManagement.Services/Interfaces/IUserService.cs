@@ -10,6 +10,7 @@ public interface IUserService
     public Task<ResponseMessage<LoginOutputDto>> Login(LoginModel model);
     public Task<ResponseMessage<List<UserDto>>> GetAllUsersService(HttpContext httpContext);
     public Task<ResponseMessage<UserDto>> GetUserByIdService(long? id);
+    public Task<ResponseMessage<string>> UpdateUserService(UserDto dto);
     
     public long GetCompanyIdFromHttpContext(HttpContext httpContext);
     public long GetUserIdFromHttpContext(HttpContext httpContext);

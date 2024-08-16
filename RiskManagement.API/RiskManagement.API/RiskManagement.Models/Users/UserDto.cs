@@ -8,3 +8,9 @@ public class UserDto
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
 }
+
+public class PasswordDto
+{
+    public string OldPassword { get; set; }
+    public string NewPassword { get; set; }
+}

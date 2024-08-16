@@ -219,6 +219,43 @@ public class UserService(ICommonHelper helper, IUserRepo userRepo) : IUserServic
         }
     }
     
+    public async Task<ResponseMessage<string>> UpdateUserService(UserDto dto)
+    {
+        try
+        {
+            var user = await userRepo.GetUserByّId(dto.Id);
+
+            if (user == null)
+            {
+                return new ResponseMessage<string>
+                {
+                    Code = 404,
+                    Content = ""
+                };
+            }
+
+            user.Email = dto.Email;
+            user.FullName = dto.FullName;
+            user.PhoneNumber = dto.PhoneNumber;
+
+            await userRepo.UpdateUser(user);
+            
+            return new ResponseMessage<string>
+            {
+                Code = 200,
+                Content = "عملیات با موفقیت انجام شد!"
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<string>
+            {
+                Code = 500,
+                Content = "عملیات با خطا مواجه شد!"
+            };
+        }
+    }
+    
     /*
      *
      * get data from jwt world :)

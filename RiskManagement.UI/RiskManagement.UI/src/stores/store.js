@@ -21,8 +21,8 @@ export const useUserStore = defineStore("user", {
     updateProjectModal: false,
     url: "http://172.20.10.3:5151/",
     loginRes: false,
-    token: localStorage.getItem('token'),
-    isAdmin: localStorage.getItem('isAdmin')
+    token: JSON.parse(localStorage.getItem('token')),
+    isAdmin: JSON.parse(localStorage.getItem('isAdmin'))
   }),
 
 
@@ -44,9 +44,10 @@ export const useUserStore = defineStore("user", {
           localStorage.setItem('isAdmin', JSON.stringify(response.data.isAdmin))   
           
           this.loginRes = true;
-          this.token = localStorage.getItem('token')
-          this.isAdmin = localStorage.getItem('isAdmin')
+          this.token = JSON.parse(localStorage.getItem('token'))
+          this.isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
 
+          this.GetUser();
         });
 
       } catch (error) {
@@ -71,6 +72,45 @@ export const useUserStore = defineStore("user", {
         });
       } catch (error) {
         console.log('response-login', error)
+      }
+    },
+
+    async Update(req) {
+      let url = `${this.url}users/updateUser`;
+      try {
+        let res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: 'Bearer ' + this.token
+          },
+          body: JSON.stringify(req),
+        });
+        await res.json().then((response) => {
+          console.log('response-Update', response)
+        });
+      } catch (error) {
+        console.log('response-Update', error)
+      }
+    },
+
+    async GetUser() {
+      let url = `${this.url}users/getUser`;
+      let t = JSON.parse(localStorage.getItem('token'))
+      try {
+        let res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: 'Bearer ' + t
+          },
+        });
+        await res.json().then((response) => {
+          this.user = response.data
+          console.log('response-GetUser', response)
+        });
+      } catch (error) {
+        console.log('response-GetUser', error)
       }
     },
 

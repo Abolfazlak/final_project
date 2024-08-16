@@ -80,5 +80,28 @@ public class UserModule : CarterModule
                 _  => Results.Problem("عملیات با خطا مواجه شد")
             };
         });
+        
+        app.MapGet("/users/getUser", async (IUserService service, HttpContext httpContext) =>
+        {
+            var id = service.GetUserIdFromHttpContext(httpContext);
+            var res = await service.GetUserByIdService(id);
+            return res.Code switch
+            {
+                200 => Results.Ok(new { Data = res.Content }),
+                404 => Results.NotFound(),
+                _  => Results.Problem("عملیات با خطا مواجه شد")
+            };
+        });
+        
+        app.MapPost("/users/updateUser", async (IUserService service, UserDto dto) =>
+        {
+            var res = await service.UpdateUserService(dto);
+            return res.Code switch
+            {
+                200 => Results.Ok(new { Data = res.Content }),
+                404 => Results.NotFound(),
+                _  => Results.Problem("عملیات با خطا مواجه شد")
+            };
+        });
     }
 }

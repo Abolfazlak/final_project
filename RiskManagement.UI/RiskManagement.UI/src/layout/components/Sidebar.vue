@@ -1,7 +1,7 @@
 <template>
   <div class="sideBarContainer">
       <div class="sideBarContainer-top">
-        <div   v-for="item in items" :class=" item.name == routName ? 'sideBarContainer-top-item sideBarContainer-top-item-avtive' : 'sideBarContainer-top-item' ">
+        <div   v-for="item in items" :class=" item.name == routName || item.name2 == routName ? 'sideBarContainer-top-item sideBarContainer-top-item-avtive' : 'sideBarContainer-top-item' ">
           <svg :style="{ width: '32px', height: '32px', color: 'black' }" viewBox="0 0 28 28">
         <path :d=item.icon />
       </svg>
@@ -61,11 +61,11 @@ import {useRoute} from 'vue-router'
 
 const route = useRoute()
 const items =  [
-        { text: 'مدیریت پروژه', icon: mdiBookMultiple, name: 'projects'},
-        { text: 'مدیریت ریسک', icon: mdiShieldPlus,  name: 'risks'},
-        { text: 'وضعیت ریسک', icon: mdiListStatus, name: 'stasus' },
-        { text: 'گزارشات', icon: mdiChartBar, name: 'reports' },
-        { text: 'مدیریت کاربران', icon: mdiCog, name: 'setting' },
+        { text: 'مدیریت پروژه', icon: mdiBookMultiple, name: 'projects', name2: ''},
+        { text: 'مدیریت ریسک', icon: mdiShieldPlus,  name: 'risks', name2: 'solutions'},
+        { text: 'وضعیت ریسک', icon: mdiListStatus, name: 'stasus', name2: '' },
+        { text: 'گزارشات', icon: mdiChartBar, name: 'reports', name2: '' },
+        { text: 'مدیریت کاربران', icon: mdiCog, name: 'setting', name2: '' },
       ]
 
 const routName = route.name

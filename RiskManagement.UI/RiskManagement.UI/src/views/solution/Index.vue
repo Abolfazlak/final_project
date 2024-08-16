@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full pb-20">
-    <v-card class="ml-24 mt-24">
+    <v-card class="ml-8 mt-8">
       <v-card-title class="d-flex align-center pe-2 mb-16">
         <div class="flex justify-between w-full pt-4">
           <div class="w-1/4 font-bold text-2xl mt-2">مدیریت راه‌حل‌های پروژه</div>
@@ -22,7 +22,7 @@
         </div>
       </v-card-title>
       <v-data-table
-        class="px-8 pb-14"
+        class="table-content px-8 pb-14"
         v-model:search="search"
         :headers="headers"
         :items="serverItems"
@@ -218,5 +218,10 @@ watch(
 .v-data-table__td {
   font-weight: normal;
   font-size: medium;
+}
+
+.table-content{
+  height: 69vh;
+  overflow-y: auto;
 }
 </style>
