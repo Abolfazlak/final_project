@@ -3,7 +3,7 @@
     <v-card class="ml-24 mt-24">
       <v-card-title class="d-flex align-center pe-2 mb-16">
         <div class="flex justify-between w-full pt-4">
-          <div class="w-1/4 font-bold text-2xl mt-2">مدیریت ریسک های پروژه</div>
+          <div class="w-1/4 font-bold text-2xl mt-2">مدیریت راه‌حل‌های پروژه</div>
           <div class="flex w-1/3">
             <v-text-field
               class="mt-2 h-16"
@@ -17,9 +17,7 @@
               hide-details
               single-line
             ></v-text-field>
-            <v-btn class="mt-2 mr-4 px-6 ml-4 h-12" color="primary" @click="showCreateModal"
-              >ایجاد</v-btn
-            >
+            <v-btn class="mt-2 mr-4 px-6 ml-4 h-12" color="primary" @click="showCreateModal">ایجاد</v-btn>
           </div>
         </div>
       </v-card-title>
@@ -35,6 +33,12 @@
         <template v-slot:item.rowNumber="{ index }">
           {{ index + 1 + itemsPerPage * (currentPage - 1) }}
         </template>
+        
+        <!-- Format the amount with commas and add the ریال symbol -->
+        <template v-slot:item.amount="{ item }">
+          {{ formatCurrency(item.amount) }}
+        </template>
+
         <template v-slot:item.actions="{ item }">
           <v-btn
             @click="item.showBtn = !item.showBtn"
@@ -44,48 +48,30 @@
             color="info"
           ></v-btn>
           <v-list class="absolute z-50 mr-16 -mt-16 shadow-lg rounded-lg" v-if="item.showBtn">
-            <v-list-item
-              ><v-btn class="w-20" color="info" @click="showDetailsModal(item.id)"
-                >جزيیات</v-btn
-              ></v-list-item
-            >
-            <v-list-item> <v-btn class="w-20" color="success" @click="gotoSolutions(item.id)">راه‌حل‌ها</v-btn></v-list-item>
             <v-list-item>
-              <v-btn class="w-20" color="warning" @click="showUpdateModal(item)">
-                ویرایش</v-btn
-              ></v-list-item
-            >
+              <v-btn class="w-20" color="warning" @click="showUpdateModal(item)">ویرایش</v-btn>
+            </v-list-item>
             <v-list-item>
-              <v-btn class="w-20" color="red" @click="deleteRisk(item.id)"> حذف</v-btn></v-list-item
-            >
+              <v-btn class="w-20" color="red" @click="deleteSolution(item.id)"> حذف</v-btn>
+            </v-list-item>
           </v-list>
         </template>
       </v-data-table>
     </v-card>
   </div>
-
-  <create-risk :isCreateModalVisible="isCreateModalVisibleRef"></create-risk>
-  <update-risk :isUpdateModalVisible="isUpdateModalVisibleRef" :items="updateItems"></update-risk>
-  <risk-details :riskId="riskIdRef" :isDetailsModalVisible="isDetailsModalVisibleRef"></risk-details>
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/store.js'
-import CreateRisk from './CreateRisk.vue'
-import UpdateRisk from './UpdateRisk.vue'
-import RiskDetails from './RiskDetails.vue'
-
 import { toast } from 'vue3-toastify'
 
 const user = useUserStore()
 const route = useRoute()
-const router = useRouter()
 
 const isCreateModalVisibleRef = ref(false)
 const isUpdateModalVisibleRef = ref(false)
-const isDetailsModalVisibleRef = ref(false)
 
 const token = JSON.parse(localStorage.getItem('token'))
 const search = ref('')
@@ -94,40 +80,33 @@ const currentPage = ref(1)
 
 const headers = [
   { title: 'ردیف', align: 'start', sortable: false, key: 'rowNumber' },
-  { title: 'عنوان ریسک', key: 'title', align: 'start' },
-  { title: 'گروه ریسک', key: 'mainRiskCategory.title', align: 'start' },
-  { title: 'دسته‌بندی ریسک', key: 'secondaryRiskCategory.title', align: 'start' },
+  { title: 'عنوان راه‌حل', key: 'description', align: 'center' },
+  { title: 'هزینه برآورد شده پس از آن', key: 'amount', align: 'center' },
   { title: '', key: 'actions', sortable: false }
 ]
 const serverItems = ref([])
 const loading = ref(true)
 const totalItems = ref(0)
 const updateItems = ref(null)
-const riskIdRef = ref(0)
+
+const riskId = route.params.riskId
 
 const loadItems = ({ page, itemsPerPage, sortBy }) => {
   currentPage.value = page // Track the current page
   loading.value = true
-  getAllRisks(route.params.id)
+  getAllSolutions(riskId)
 }
 
 function showCreateModal() {
-  user.createRiskModal = true
+  user.createSolutionModal = true
   isCreateModalVisibleRef.value = true
 }
 
 function showUpdateModal(item) {
-  user.isFirstGetCategory = false
-  user.updateRiskModal = true
+  user.updateSolutionModal = true
   isUpdateModalVisibleRef.value = true
-  user.riskUpdateItems = item
+  user.solutionUpdateItems = item
   updateItems.value = item
-}
-
-function showDetailsModal(id) {
-  user.riskDetailsModal = true
-  isDetailsModalVisibleRef.value = true
-  riskIdRef.value = id
 }
 
 function loader() {
@@ -138,8 +117,8 @@ function loader() {
   })
 }
 
-const getAllRisks = async (id) => {
-  const url = `${user.url}risk/getAllRisksByProjectId?id=${id}`
+const getAllSolutions = async (id) => {
+  const url = `${user.url}risk/solution/getAllSolutionByRiskId?id=${id}`
   try {
     const res = await fetch(url, {
       method: 'GET',
@@ -153,12 +132,12 @@ const getAllRisks = async (id) => {
     totalItems.value = response.data.length
     loading.value = false
   } catch (error) {
-    console.log('response-getAllRisks', error)
+    console.log('response-getAllSolutions', error)
   }
 }
 
-const deleteRisk = async (id) => {
-  const url = `${user.url}risk/deleteRisk?id=${id}`
+const deleteSolution = async (id) => {
+  const url = `${user.url}risk/solution/deleteSolution?id=${id}`
   try {
     const res = await fetch(url, {
       method: 'POST',
@@ -172,12 +151,14 @@ const deleteRisk = async (id) => {
     loadItems({ page: 1, itemsPerPage: itemsPerPage.value })
   } catch (error) {
     toast.error(error.message)
-    console.log('response-deleteRisk', error)
+    console.log('response-deleteSolution', error)
   }
 }
 
-function gotoSolutions(id) {
-  router.push({ name: 'solutions', params: { id: route.params.id, riskId: id } })
+// Method to format amount with comma separators and add the "ریال" symbol
+const formatCurrency = (amount) => {
+  if (!amount) return ''
+  return `${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ریال`
 }
 
 onMounted(() => {
@@ -185,7 +166,7 @@ onMounted(() => {
 })
 
 watch(
-  () => user.createRiskModal,
+  () => user.createSolutionModal,
   async (newval) => {
     isCreateModalVisibleRef.value = newval
     if (newval == false) {
@@ -195,7 +176,7 @@ watch(
 )
 
 watch(
-  () => user.updateRiskModal,
+  () => user.updateSolutionModal,
   async (newval) => {
     isUpdateModalVisibleRef.value = newval
     if (newval == false) {
@@ -205,17 +186,7 @@ watch(
 )
 
 watch(
-  () => user.riskDetailsModal,
-  async (newval) => {
-    isDetailsModalVisibleRef.value = newval
-    if (newval == false) {
-      loader()
-    }
-  }
-)
-
-watch(
-  () => user.riskUpdateItems,
+  () => user.solutionUpdateItems,
   async (newval) => {
     updateItems.value = newval
   }

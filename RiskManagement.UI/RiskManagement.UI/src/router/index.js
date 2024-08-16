@@ -28,8 +28,15 @@ const router = createRouter({
       meta: {
         layout: PanelLayout
       },
-     
+    },
 
+    {
+      path: '/risks/solution/:id/:riskId',
+      name: 'solutions',
+      component:() => import('@/views/solution/Index.vue'),
+      meta: {
+        layout: PanelLayout
+      }
     }
   ]
 })

@@ -10,24 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f5047cee-2883-45cb-8a0f-d83a92f75164" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RiskManagement.API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RiskManagement.API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Models/Risks/RiskDetailsDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Models/Risks/RiskDetailsDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/RiskModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/RiskModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Repositories/RiskRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Repositories/RiskRepo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/RiskService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/RiskService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/ref/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/ref/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/refint/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/refint/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/layout/components/Sidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/layout/components/Sidebar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +35,8 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Users/abolfazl/Desktop/final_project/final_project/RiskManagement.API/RiskManagement.API/RiskManagement.Models/Projects/CreateProjectDto.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/abolfazl/Desktop/final_project/final_project/RiskManagement.API/RiskManagement.API/RiskManagement.Repositories/Interfaces/IRiskRepo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5e15ba24065646ab8edfdd48fa903c1426a830/6e/d54cbf03/DbSet`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df33c7fd7db04a829574707592655c01d82000/13/7a1c8ae9/List`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df33c7fd7db04a829574707592655c01d82000/1a/7dfd405a/Int32.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f9dffc0a33d34b3aa61c387d9e7af3c43ea00/bf/c5446b43/Results.cs" root0="SKIP_HIGHLIGHTING" />
@@ -73,7 +55,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.RiskManagement.API: http.executor": "Debug",
+    ".NET Launch Settings Profile.RiskManagement.API: http.executor": "Run",
     "4e8fa9ce-552e-4499-8ade-8a6059b32d6a.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -168,7 +150,7 @@
       <workItem from="1722457319782" duration="90482000" />
       <workItem from="1723312545736" duration="1120000" />
       <workItem from="1723380140146" duration="5632000" />
-      <workItem from="1723488185939" duration="32125000" />
+      <workItem from="1723488185939" duration="33772000" />
     </task>
     <task id="LOCAL-00001" summary="initial backend project">
       <option name="closed" value="true" />
@@ -296,13 +278,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/RiskManagement.API/RiskManagement.Repositories/RiskRepo.cs</url>
-          <line>172</line>
+          <line>173</line>
           <properties documentPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Repositories/RiskRepo.cs" initialLine="172" containingFunctionPresentation="Method 'UpdateRiskDetail'">
             <startOffsets>
-              <option value="5319" />
+              <option value="5354" />
             </startOffsets>
             <endOffsets>
-              <option value="5340" />
+              <option value="5375" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="15" />
