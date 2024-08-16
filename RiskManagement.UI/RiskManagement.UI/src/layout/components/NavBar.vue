@@ -259,7 +259,7 @@ function submitLoginForm() {
 
       if (user.loginRes) {
         closeLoginModal()
-        router.push({ path: '/projects' })
+        router.push({ name: 'projects' })
       } else {
         closeLoginModal()
       }

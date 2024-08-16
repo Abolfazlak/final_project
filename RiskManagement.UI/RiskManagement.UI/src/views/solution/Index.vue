@@ -59,6 +59,10 @@
       </v-data-table>
     </v-card>
   </div>
+
+  <create-solution :isCreateModalVisible="isCreateModalVisibleRef"></create-solution>
+  <update-solution :isUpdateModalVisible="isUpdateModalVisibleRef" :items="updateItems"></update-solution>
+
 </template>
 
 <script setup>
@@ -66,6 +70,8 @@ import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/store.js'
 import { toast } from 'vue3-toastify'
+import CreateSolution from '@/views/solution/CreateSolution.vue'
+import UpdateSolution from '@/views/solution/UpdateSolution.vue'
 
 const user = useUserStore()
 const route = useRoute()
