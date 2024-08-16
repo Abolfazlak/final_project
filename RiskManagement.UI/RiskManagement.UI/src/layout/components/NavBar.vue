@@ -2,13 +2,14 @@
   <div class="Navbar">
     <div class="Navbar-Right">
       <img class="Navbar-Right-Logo" src="/logo.png" alt="logo" />
+      <div class="Navbar-Right-title">سامانه مدیریت ریسک راسا</div>
     </div>
     <div class="Navbat-Left" v-if="token || loginResRef">
       <svg :style="{ width: '32px', height: '32px', color: 'black' }" viewBox="0 0 28 28">
-        <path :d="mdiLogout" />
+        <path :d="mdiAccount" />
       </svg>
 
-      <div class="loginBtn" @click="logoutFunc">خروج</div>
+      <div class="loginBtn" @click="logoutFunc">ابوالفضل اخوی ثمرین</div>
     </div>
     <div  v-else class="Navbat-Left">
       <svg :style="{ width: '32px', height: '32px', color: 'black' }" viewBox="0 0 28 28">
@@ -288,25 +289,57 @@ watch(
 
 <style>
 .Navbar {
-  height: 80px;
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding: 0 60px;
+  padding: 0 10px;
   padding-top: 10px;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
-}
-.Navbat-Left {
-  display: flex;
-  gap: 10px;
+  background-color: #F6F6F6;
 }
 
+.Navbar-Right{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .Navbar-Right-Logo {
   width: 70px;
 }
 .Navbar-Right-Logo:hover {
   cursor: pointer;
+}
+
+.Navbar-Right-title{
+  font-family: 'Yekan-Bakh-Fat';
+  font-size: 25px;
+  color: #1A2731;
+}
+.Navbat-Left {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 30px;
+  font-size: 20px;
+  font-family: 'Yekan-Bakh-Heavy';
+  padding: 10px 30px;
+  border-radius: 5px;
+  border: 0.5px solid #dcdcdc;
+  transition: 0.5s;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.Navbat-Left:hover{
+  background: #1A2731;
+  cursor: pointer;
+  transition: 0.5s;
+  color: #F6F6F6;
+
+}
+.loginBtn{
+  display: flex;
 }
 
 .loginBtn:hover {
