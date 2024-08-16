@@ -12,6 +12,8 @@ a,
 
 }
 
+
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
@@ -25,4 +27,36 @@ a,
   #app {
 
   }
+}
+
+
+@font-face {
+  font-family: "Yekan-Bakh-Light";
+  src: local("Yekan-Bakh-Light"),
+    url(./fonts/Yekan-Bakh-Light.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Yekan-Bakh-Medium";
+  src: local("Yekan-Bakh-Medium"),
+    url(./fonts/Yekan-Bakh-Medium.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Yekan-Bakh-Regular";
+  src: local("Yekan-Bakh-Regular"),
+    url(./fonts/Yekan-Bakh-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Yekan-Bakh-Bold";
+  src: local("Yekan-Bakh-Bold"),
+    url(./fonts/Yekan-Bakh-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Yekan-Bakh-Fat";
+  src: local("Yekan-Bakh-Fat"),
+    url(./fonts/Yekan-Bakh-Fat.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Yekan-Bakh-Heavy";
+  src: local("Yekan-Bakh-Heavy"),
+    url(./fonts/Yekan-Bakh-Heavy.ttf) format("truetype");
 }

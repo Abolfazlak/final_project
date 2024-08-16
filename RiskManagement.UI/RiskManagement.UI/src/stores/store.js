@@ -19,7 +19,7 @@ export const useUserStore = defineStore("user", {
     updateRiskModal: false,
     createProjectModal: false,
     updateProjectModal: false,
-    url: "http://localhost:5151/",
+    url: "http://172.20.10.3:5151/",
     loginRes: false,
     token: localStorage.getItem('token'),
     isAdmin: localStorage.getItem('isAdmin')
