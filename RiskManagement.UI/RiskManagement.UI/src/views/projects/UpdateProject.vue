@@ -26,10 +26,11 @@
               v-model="updateItems.userDto"
               label="مسئول"
               :items="people"
-              item-title="fullName"
+              item-title="userName"
               item-value="id"
               variant="outlined"
               rounded="lg"
+              :prepend-avatar="avatar"
             >
               <template v-slot:chip="{ props, item }">
                 <v-chip v-bind="props" :prepend-avatar="avatar" :text="item.raw.name"></v-chip>
@@ -59,12 +60,12 @@
       <v-row class="flex text-center items-center justify-center mt-8 px-3 gap-3 mb-1">
         <v-btn
           class="flex w-2.4/5 py-6 text-center items-center"
-          color="primary"
+          color="#4da35a"
           rounded="lg"
           @click="updateProject"
           >ثبت</v-btn
         >
-        <v-btn class="flex w-2.4/5 py-6 text-center items-center" color="red" rounded="lg" @click="closeUpdateModal"
+        <v-btn class="flex w-2.4/5 py-6 text-center items-center" variant="outlined" color="red" rounded="lg" @click="closeUpdateModal"
           >انصراف</v-btn
         >
       </v-row>
@@ -77,6 +78,8 @@ import modal from '@/components/CreateUpdateModal.vue'
 import { ref, onMounted, reactive, watch } from 'vue'
 import { useUserStore } from '@/stores/store.js'
 import { toast } from 'vue3-toastify'
+
+const avatar = 'avatar.png'
 
 const user = useUserStore()
 

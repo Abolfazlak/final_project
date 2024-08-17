@@ -80,13 +80,18 @@ const router = useRouter()
 const routName = ref(user.routeName)
 const id = route.params.id
 
-const items = [
+const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+
+const allItems = [
   { text: 'مدیریت پروژه', icon: mdiBookMultiple, name: 'projects', name2: '' },
   { text: 'مدیریت ریسک', icon: mdiShieldPlus, name: 'risks', name2: 'solutions' },
   { text: 'وضعیت ریسک', icon: mdiListStatus, name: 'status', name2: '' },
   { text: 'گزارشات', icon: mdiChartBar, name: 'reports', name2: '' },
   { text: 'مدیریت کاربران', icon: mdiCog, name: 'setting', name2: '' }
 ]
+
+const items = ref(allItems.filter(item => isAdmin || item.name !== 'setting'))
+
 
 function routeToPages(name) {
   if (name == 'projects') {
