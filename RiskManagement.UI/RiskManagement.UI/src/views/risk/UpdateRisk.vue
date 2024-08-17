@@ -16,7 +16,7 @@
           <div class="w-full flex">
             <v-select
               v-model="mainCategory"
-              class="w-1/2 ml-2"
+              class="w-1/2 ml-3"
               label="نوع ریسک"
               variant="outlined"
               rounded="lg"
@@ -27,7 +27,7 @@
             ></v-select>
             <v-select
               v-model="updateItems.secondaryRiskCategory"
-              class="w-1/2 ml-2"
+              class="w-1/2"
               label="دسته‌بندی ریسک"
               variant="outlined"
               rounded="lg"
@@ -44,7 +44,7 @@
       <v-row class="flex text-center items-center justify-center mt-8 px-3 gap-3 mb-1">
         <v-btn
           class="flex w-2.4/5 py-6 text-center items-center"
-          color="primary"
+          color="#4da35a"
           rounded="lg"
           @click="updateRisktBtn"
           >ثبت</v-btn
@@ -53,6 +53,7 @@
           class="flex w-2.4/5 py-6 text-center items-center"
           color="red"
           rounded="lg"
+          variant="outlined"
           @click="closeUpdateModal"
           >انصراف</v-btn
         >
@@ -67,7 +68,6 @@ import { ref, onMounted, reactive, watch } from 'vue'
 import { useUserStore } from '@/stores/store.js'
 import { toast } from 'vue3-toastify'
 import { useRoute } from 'vue-router'
-
 
 const user = useUserStore()
 const route = useRoute()
@@ -85,8 +85,8 @@ const secondaryRiskCategories = ref([])
 
 const mainCategory = ref(null)
 
-const isFirst = ref(false);
-let projectId = route.params.id;
+const isFirst = ref(false)
+let projectId = route.params.id
 
 function closeUpdateModal() {
   isUpdateModalVisibleRef.value = false
@@ -170,12 +170,12 @@ watch(
   () => mainCategory.value,
   async (newval) => {
     console.log('newval', newval)
-    if(newval.id > 0){
-      if(user.isFirstGetCategory){
+    if (newval.id > 0) {
+      if (user.isFirstGetCategory) {
         updateItems.value.secondaryRiskCategory = null
       }
       getSecondaryRiskCategories(newval.id)
-      user.isFirstGetCategory = true;
+      user.isFirstGetCategory = true
     }
   }
 )

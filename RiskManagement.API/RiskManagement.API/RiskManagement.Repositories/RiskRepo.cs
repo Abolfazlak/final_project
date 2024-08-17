@@ -20,6 +20,7 @@ public class RiskRepo(RiskManagementDbContext context) : IRiskRepo
             .Include(r => r.SecondaryRiskCategory)
             .Include(r => r.SecondaryRiskCategory.MainRiskCategory)
             .Include(r => r.RiskDetails)
+            .Include(r => r.Solutions)
             .Where(r => r.ProjectId == id)
             .Select(r => new RiskStatusDto
             {

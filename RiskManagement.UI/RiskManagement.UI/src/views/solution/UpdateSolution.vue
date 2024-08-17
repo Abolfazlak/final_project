@@ -1,6 +1,6 @@
 <template>
   <modal :show="isUpdateModalVisibleRef" @close="closeUpdateModal">
-    <template v-slot:header> <div class="font-bold text-base">ویرایش پروژه</div></template>
+    <template v-slot:header> <div class="font-bold text-base">ویرایش راه‌حل</div></template>
     <template v-slot:body>
       <v-locale-provider rtl>
         <v-textarea
@@ -27,12 +27,17 @@
       <v-row class="flex text-center items-center justify-center mt-8 px-3 gap-3 mb-1">
         <v-btn
           class="flex w-2.4/5 py-6 text-center items-center"
-          color="primary"
+          color="#4da35a"
           rounded="lg"
           @click="updateSolution"
           >ثبت</v-btn
         >
-        <v-btn class="flex w-2.4/5 py-6 text-center items-center" color="red" rounded="lg" @click="closeUpdateModal"
+        <v-btn
+          class="flex w-2.4/5 py-6 text-center items-center"
+          variant="outlined"
+          color="red"
+          rounded="lg"
+          @click="closeUpdateModal"
           >انصراف</v-btn
         >
       </v-row>
@@ -86,28 +91,27 @@ async function updateSolution() {
   }
 }
 
-
 const formattedAmount = computed({
   get() {
-    return formatNumber(updateItems.value.amount);
+    return formatNumber(updateItems.value.amount)
   },
   set(newValue) {
-    updateItems.value.amount = parseNumber(newValue);
+    updateItems.value.amount = parseNumber(newValue)
   }
-});
+})
 
 function formatNumber(value) {
-  if (value === null || value === undefined) return '';
-  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  if (value === null || value === undefined) return ''
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
 function parseNumber(value) {
-  return parseInt(value.toString().replace(/,/g, ''), 10);
+  return parseInt(value.toString().replace(/,/g, ''), 10)
 }
 
 function updateSolutionAmount(event) {
-  const value = event.target.value;
-  updateItems.value.amount = parseNumber(value);
+  const value = event.target.value
+  updateItems.value.amount = parseNumber(value)
 }
 
 function closeUpdateModal() {

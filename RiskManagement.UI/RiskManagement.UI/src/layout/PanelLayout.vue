@@ -6,13 +6,11 @@ import Sidebar from '@/layout/components/Sidebar.vue'
 <template>
   <div class="flex flex-col">
     <NavBar class="w-full"></NavBar>
-    <div class="flex ">
-        <Sidebar  />
-        <div class="flex  w-full">
-            <div class="empty-layout mt-2"></div>
+    <div class="flex">
+        <Sidebar  class="flex w-1/5"/>
+        <div class="flex w-4/5">
             <RouterView class="main-layout"/>
         </div>
-  
     </div>
   </div>
 </template>
@@ -25,5 +23,6 @@ import Sidebar from '@/layout/components/Sidebar.vue'
 
 .main-layout{
   width: 98vw;
+  height: 85vh !important;
 }
 </style>

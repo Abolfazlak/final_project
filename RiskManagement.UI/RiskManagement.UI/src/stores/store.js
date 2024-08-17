@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify';
+import { useRoute, useRouter } from 'vue-router'
 
 export const useUserStore = defineStore("user", {
 
@@ -8,6 +9,9 @@ export const useUserStore = defineStore("user", {
     user: {
 
     },
+    routeName: null,
+    route: useRoute(),
+    router: useRouter(),
     isFirstGetCategory: false,
     riskUpdateItems: null,
     updateItems: null,
@@ -19,7 +23,7 @@ export const useUserStore = defineStore("user", {
     updateRiskModal: false,
     createProjectModal: false,
     updateProjectModal: false,
-    url: "http://172.20.10.3:5151/",
+    url: "http://localhost:5151/",
     loginRes: false,
     token: JSON.parse(localStorage.getItem('token')),
     isAdmin: JSON.parse(localStorage.getItem('isAdmin'))

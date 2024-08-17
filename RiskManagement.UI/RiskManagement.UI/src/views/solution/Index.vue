@@ -1,28 +1,35 @@
 <template>
-  <div class="w-full h-full pb-20">
-    <v-card class="ml-8 mt-8">
-      <v-card-title class="d-flex align-center pe-2 mb-16">
+  <div class="w-full h-full">
+    <v-card class="mx-6 mt-8">
+      <v-card-title class="d-flex align-center">
         <div class="flex justify-between w-full pt-4">
-          <div class="w-1/4 font-bold text-2xl mt-2">مدیریت راه‌حل‌های پروژه</div>
+          <div class="w-1/4 font-bold text-xl mt-2">مدیریت راه‌حل‌های پروژه</div>
           <div class="flex w-1/3">
-            <v-text-field
-              class="mt-2 h-16"
-              items-per-page="5"
-              v-model="search"
-              density="compact"
-              label="جستجو"
-              prepend-inner-icon="mdi-magnify"
-              variant="solo-filled"
-              flat
-              hide-details
-              single-line
-            ></v-text-field>
-            <v-btn class="mt-2 mr-4 px-6 ml-4 h-12" color="primary" @click="showCreateModal">ایجاد</v-btn>
+            <v-locale-provider rtl>
+              <v-text-field
+                class="mt-2 h-12 text-xs"
+                items-per-page="5"
+                v-model="search"
+                density="small"
+                label="جستجو"
+                prepend-inner-icon="mdi-magnify"
+                variant="solo-filled"
+                flat
+                hide-details
+                single-line
+              ></v-text-field>
+            </v-locale-provider>
+            <v-btn
+              class="btn-txt mt-2 mr-4 px-6 ml-4 h-9 text-center items-center flex text-xs"
+              color="#4da35a"
+              @click="showCreateModal"
+              >ایجاد</v-btn
+            >
           </div>
         </div>
       </v-card-title>
       <v-data-table
-        class="table-content px-8 pb-14"
+        class="table-content px-8 pb-2"
         v-model:search="search"
         :headers="headers"
         :items="serverItems"
@@ -33,7 +40,7 @@
         <template v-slot:item.rowNumber="{ index }">
           {{ index + 1 + itemsPerPage * (currentPage - 1) }}
         </template>
-        
+
         <!-- Format the amount with commas and add the ریال symbol -->
         <template v-slot:item.amount="{ item }">
           {{ formatCurrency(item.amount) }}
@@ -42,17 +49,20 @@
         <template v-slot:item.actions="{ item }">
           <v-btn
             @click="item.showBtn = !item.showBtn"
-            class="my-4"
+            class="ml-16 text-black"
+            size="small"
             density="default"
             icon="mdi-format-list-bulleted"
-            color="info"
+            color="white"
           ></v-btn>
           <v-list class="absolute z-50 mr-16 -mt-16 shadow-lg rounded-lg" v-if="item.showBtn">
             <v-list-item>
-              <v-btn class="w-20" color="warning" @click="showUpdateModal(item)">ویرایش</v-btn>
+              <v-btn class="w-20" color="#EC622E" @click="showUpdateModal(item)">ویرایش</v-btn>
             </v-list-item>
             <v-list-item>
-              <v-btn class="w-20" color="red" @click="deleteSolution(item.id)"> حذف</v-btn>
+              <v-btn class="w-20" variant="outlined" color="red" @click="deleteSolution(item.id)">
+                حذف</v-btn
+              >
             </v-list-item>
           </v-list>
         </template>
@@ -61,8 +71,10 @@
   </div>
 
   <create-solution :isCreateModalVisible="isCreateModalVisibleRef"></create-solution>
-  <update-solution :isUpdateModalVisible="isUpdateModalVisibleRef" :items="updateItems"></update-solution>
-
+  <update-solution
+    :isUpdateModalVisible="isUpdateModalVisibleRef"
+    :items="updateItems"
+  ></update-solution>
 </template>
 
 <script setup>
@@ -76,6 +88,8 @@ import UpdateSolution from '@/views/solution/UpdateSolution.vue'
 const user = useUserStore()
 const route = useRoute()
 
+user.routeName = 'risks'
+
 const isCreateModalVisibleRef = ref(false)
 const isUpdateModalVisibleRef = ref(false)
 
@@ -86,8 +100,8 @@ const currentPage = ref(1)
 
 const headers = [
   { title: 'ردیف', align: 'start', sortable: false, key: 'rowNumber' },
-  { title: 'عنوان راه‌حل', key: 'description', align: 'center' },
-  { title: 'هزینه برآورد شده پس از آن', key: 'amount', align: 'center' },
+  { title: 'عنوان راه‌حل', key: 'description', align: 'start' },
+  { title: 'هزینه برآورد شده پس از آن', key: 'amount', align: 'start' },
   { title: '', key: 'actions', sortable: false }
 ]
 const serverItems = ref([])
@@ -164,7 +178,7 @@ const deleteSolution = async (id) => {
 // Method to format amount with comma separators and add the "ریال" symbol
 const formatCurrency = (amount) => {
   if (!amount) return ''
-  return `${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ریال`
+  return `${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} ریال`
 }
 
 onMounted(() => {
@@ -212,7 +226,7 @@ watch(
 }
 .v-data-table-header__content span {
   font-weight: bold;
-  font-size: large;
+  font-size: medium;
 }
 
 .v-data-table__td {
@@ -220,8 +234,16 @@ watch(
   font-size: medium;
 }
 
-.table-content{
+.table-content {
   height: 69vh;
   overflow-y: auto;
+}
+
+.btn-txt {
+  display: flex;
+  font-family: 'Yekan-Bakh-Heavy';
+  font-size: medium;
+  justify-content: center;
+  align-items: center;
 }
 </style>

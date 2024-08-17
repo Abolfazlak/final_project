@@ -16,7 +16,7 @@
           <div class="w-full flex">
             <v-select
               v-model="mainCategoryId"
-              class="w-1/2 ml-2"
+              class="w-1/2 ml-3"
               label="نوع ریسک"
               variant="outlined"
               rounded="lg"
@@ -26,7 +26,7 @@
             ></v-select>
             <v-select
               v-model="createRiskModel.secondaryRiskCategory"
-              class="w-1/2 ml-2"
+              class="w-1/2"
               label="دسته‌بندی ریسک"
               variant="outlined"
               rounded="lg"
@@ -42,8 +42,8 @@
     <template v-slot:footer>
       <v-row class="flex text-center items-center justify-center mt-8 px-3 gap-3 mb-1">
         <v-btn
-          class="flex w-2.4/5 py-6 text-center items-center"
-          color="primary"
+          class="flex w-2.4/5 py-6 text-center items-center text-white"
+          color="#4da35a"
           rounded="lg"
           @click="createProjectBtn"
           >ثبت</v-btn
@@ -51,6 +51,7 @@
         <v-btn
           class="flex w-2.4/5 py-6 text-center items-center"
           color="red"
+          variant= "outlined"
           rounded="lg"
           @click="closeCreateModal"
           >انصراف</v-btn

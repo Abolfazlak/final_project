@@ -120,7 +120,7 @@
             <div class="flex">
               <div class="w-1/4 text-gray mr-6 ml-16">تاریخ بررسی:</div>
               <custom-date-picker
-                class="mr-32"
+                class="mr-20"
                 v-model="riskDetailModel.estimatedDateTime"
                 format="jYYYY/jMM/jDD HH:mm"
               />
@@ -158,7 +158,7 @@
       <v-row class="flex text-center items-center justify-center mt-8 px-3 gap-3 mb-1">
         <v-btn
           class="flex w-2.4/5 py-6 text-center items-center"
-          color="primary"
+          color="#4da35a"
           rounded="lg"
           @click="addRiskDetailsBtn"
           >ثبت</v-btn
@@ -167,6 +167,7 @@
           class="flex w-2.4/5 py-6 text-center items-center"
           color="red"
           rounded="lg"
+          variant="outlined"
           @click="closeDetailsModal"
           >انصراف</v-btn
         >
@@ -185,6 +186,7 @@ import moment from 'jalali-moment'
 
 const user = useUserStore()
 const route = useRoute()
+
 const projectId = route.params.id
 
 const emit = defineEmits('click', 'closeDetailsModal')
@@ -394,4 +396,6 @@ watch(
 )
 </script>
 
-<style></style>
+<style>
+
+</style>

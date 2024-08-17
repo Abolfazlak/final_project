@@ -37,7 +37,26 @@ const router = createRouter({
       meta: {
         layout: PanelLayout
       }
+    },
+
+    {
+      path: '/report/:id',
+      name: 'reports',
+      component:() => import('@/views/report/Index.vue'),
+      meta: {
+        layout: PanelLayout
+      }
+    },
+
+    {
+      path: '/status/:id',
+      name: 'status',
+      component:() => import('@/views/status/Index.vue'),
+      meta: {
+        layout: PanelLayout
+      }
     }
+
   ]
 })
 

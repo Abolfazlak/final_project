@@ -5,14 +5,22 @@
       <div class="Navbar-Right-title">سامانه مدیریت ریسک راسا</div>
     </div>
     <div class="Navbat-Left" v-if="token || loginResRef" @click="showEditProfile">
-      <svg :style="{ width: '32px', height: '32px', color: 'black' }" viewBox="0 0 28 28">
+      <svg
+        class="icon-navbar"
+        :style="{ width: '32px', height: '32px', color: 'black' }"
+        viewBox="0 0 28 28"
+      >
         <path :d="mdiAccount" />
       </svg>
 
       <div class="loginBtn">{{ user.user.fullName }}</div>
     </div>
     <div v-else class="Navbat-Left">
-      <svg :style="{ width: '32px', height: '32px', color: 'black' }" viewBox="0 0 28 28">
+      <svg
+        class="icon-navbar"
+        :style="{ width: '32px', height: '32px', color: 'black' }"
+        viewBox="0 0 28 28"
+      >
         <path :d="mdiAccount" />
       </svg>
 
@@ -54,7 +62,7 @@
                 :rules="loginPasswordRules"
                 required
               ></v-text-field>
-              <v-btn class="mt-6 w-full h-12" color="primary" @click="submitLoginForm">ورود</v-btn>
+              <v-btn class="mt-6 w-full h-12" color="#4da35a" @click="submitLoginForm">ورود</v-btn>
             </v-form>
           </v-locale-provider>
         </v-container>
@@ -122,7 +130,7 @@
             </v-form>
           </v-locale-provider>
         </v-container>
-        <v-btn class="mt-2 w-full h-12" color="primary" @click="submitRegisterForm">ثبت نام</v-btn>
+        <v-btn class="mt-2 w-full h-12" color="#4da35a" @click="submitRegisterForm">ثبت نام</v-btn>
       </div>
     </template>
 
@@ -182,10 +190,10 @@
       </div>
     </template>
     <template v-slot:footer>
-      <v-row class="flex text-center items-center justify-center mt-8 px-3 gap-5 mb-1">
+      <v-row class="flex text-center items-center justify-center mt-8 px-4 gap-5 mb-1">
         <v-btn
-          class="flex w-1.1/2 py-6 text-center items-center"
-          color="primary"
+          class="flex w-1.1/2 py-6 text-center items-center text-white"
+          color="#4da35a"
           rounded="lg"
           @click="submitUpdateForm"
           >ویرایش</v-btn
@@ -194,17 +202,26 @@
           class="flex w-1.1/2 py-6 text-center items-center"
           color="red"
           rounded="lg"
+          variant="outlined"
           @click="closeUpdateModal"
           >انصراف</v-btn
         >
       </v-row>
       <v-btn
-          class="flex w-full py-6 text-center items-center mt-6"
-          color="red"
-          rounded="lg"
-          @click="logoutFunc"
-          >خروج از حساب کاربری</v-btn
+        class="flex w-11/12 py-6 justify-center mr-4 mt-6 text-black"
+        color="#7FC2A9"
+        rounded="lg"
+        variant="outlined"
+        @click="logoutFunc"
+      >
+        <svg
+          :style="{ width: '24px', height: '24px', color: 'black', paddingLeft: '4px' }"
+          viewBox="0 0 28 28"
         >
+          <path :d="mdiLogout" />
+        </svg>
+        خروج از حساب کاربری
+      </v-btn>
     </template>
   </modal>
 </template>
@@ -401,7 +418,7 @@ watch(
   padding: 0 10px;
   padding-top: 10px;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
-  background-color: #f6f6f6;
+  background-color: #f9f9f9;
 }
 
 .Navbar-Right {
@@ -411,6 +428,8 @@ watch(
 }
 .Navbar-Right-Logo {
   width: 70px;
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
 }
 .Navbar-Right-Logo:hover {
   cursor: pointer;
@@ -418,28 +437,29 @@ watch(
 
 .Navbar-Right-title {
   font-family: 'Yekan-Bakh-Fat';
-  font-size: 25px;
+  font-size: 20px;
   color: #1a2731;
 }
 .Navbat-Left {
+  background-color: #fff;
   display: flex;
   gap: 5px;
   align-items: center;
   justify-content: center;
   margin-left: 30px;
-  font-size: 20px;
+  font-size: 15px;
   font-family: 'Yekan-Bakh-Heavy';
-  padding: 10px 30px;
+  padding: 8px 20px;
   border-radius: 5px;
   border: 0.5px solid #dcdcdc;
   transition: 0.5s;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .Navbat-Left:hover {
-  background: #1a2731;
+  border: solid 1.3px #ec622e;
+  color: #ec622e;
   cursor: pointer;
   transition: 0.5s;
-  color: #f6f6f6;
 }
 .loginBtn {
   display: flex;
@@ -452,5 +472,14 @@ watch(
 .registerBtn {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.Navbat-Left .icon-navbar path {
+  fill: black; /* Default icon color */
+  transition: fill 0.3s ease; /* Smooth transition for color change */
+}
+
+.Navbat-Left:hover .icon-navbar path {
+  fill: #ec622e; /* Icon color on hover */
 }
 </style>

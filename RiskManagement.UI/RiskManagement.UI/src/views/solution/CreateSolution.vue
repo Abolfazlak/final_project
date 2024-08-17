@@ -26,8 +26,8 @@
     <template v-slot:footer>
       <v-row class="flex text-center items-center justify-center mt-8 px-3 gap-3 mb-1">
         <v-btn
-          class="flex w-2.4/5 py-6 text-center items-center"
-          color="primary"
+        class="flex w-2.4/5 py-6 text-center items-center text-white"
+          color="#4da35a"
           rounded="lg"
           @click="createSolutionBtn"
           >ثبت</v-btn
@@ -36,6 +36,7 @@
           class="flex w-2.4/5 py-6 text-center items-center"
           color="red"
           rounded="lg"
+          variant="outlined"
           @click="closeCreateModal"
           >انصراف</v-btn
         >

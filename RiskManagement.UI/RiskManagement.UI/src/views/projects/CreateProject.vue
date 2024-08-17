@@ -60,7 +60,7 @@
       <v-row class="flex text-center items-center justify-center mt-8 px-3 gap-3 mb-1">
         <v-btn
           class="flex w-2.4/5 py-6 text-center items-center"
-          color="primary"
+          color="#4da35a"
           rounded="lg"
           @click="createProjectBtn"
           >ثبت</v-btn
@@ -68,6 +68,7 @@
         <v-btn
           class="flex w-2.4/5 py-6 text-center items-center"
           color="red"
+          variant="outlined"
           rounded="lg"
           @click="closeCreateModal"
           >انصراف</v-btn

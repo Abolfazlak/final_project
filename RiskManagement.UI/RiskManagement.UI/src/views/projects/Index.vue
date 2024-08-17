@@ -2,11 +2,11 @@
   <div>
     <div class="project-title-box pt-8 justify-center items-center">
       <div class="project-title flex mb-8 mr-8 pb-4 ml-8 font-semibold text-xl">
-        <div class="w-1/4 mr-4 font-bold text-2xl mt-2">مشاهده پروژه‌های موجود</div>
+        <div class="w-1/4 mr-4 font-bold text-1.5xl mt-2">مشاهده پروژه‌های موجود</div>
         <v-btn
           v-if="isAdminRef"
           class="mt-2 mr-4 px-6 ml-4 h-12"
-          color="primary"
+          color="#4da35a"
           @click="showCreateModal"
           >ایجاد</v-btn
         >
@@ -32,10 +32,10 @@
               </div>
             </div>
             <div>
-              <v-btn class="h-10 w-24 mx-2" @click="showUpdateModal(item)" color="primary">
+              <v-btn class="h-10 w-24 mx-2" @click="showUpdateModal(item)" color="#EC622E">
                 <v-icon :icon="updateIcon"></v-icon> ویرایش
               </v-btn>
-              <v-btn v-if="isAdminRef" class="h-10 w-24" @click="deleteItem(item.id)" color="red">
+              <v-btn v-if="isAdminRef" variant="outlined" class="h-10 w-24" @click="deleteItem(item.id)" color="red">
                 <v-icon :icon="deleteIcon"></v-icon> حذف
               </v-btn>
             </div>
@@ -57,7 +57,7 @@ import { ref, onMounted, reactive, watch } from 'vue'
 import { useUserStore } from '@/stores/store.js'
 import CreateProject from './CreateProject.vue'
 import UpdateProject from './UpdateProject.vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { toast } from 'vue3-toastify'
 
 onMounted(() => {
@@ -67,6 +67,10 @@ onMounted(() => {
 const user = useUserStore()
 const projects = ref([])
 const router = useRouter()
+const route = useRoute()
+
+user.routeName = route.name
+
 
 const deleteIcon = 'mdi-delete'
 const updateIcon = 'mdi-pencil'
@@ -180,12 +184,12 @@ watch(
 
 <style scoped>
 .project-title {
-  border-bottom: 2px black solid;
+  border-bottom: 1.2px black solid;
   justify-content: space-between;
 }
 
 .v-card-container :hover {
-  transform: scale(1.005);
+  transform: scale(1.006);
   cursor: pointer;
 }
 
@@ -197,7 +201,7 @@ watch(
   flex: 1 1 calc(50% - 16px);
   box-sizing: border-box;
 
-  background: #4a57cb28;
+  background: #f5e4dede;
   height: 25vh;
 }
 </style>

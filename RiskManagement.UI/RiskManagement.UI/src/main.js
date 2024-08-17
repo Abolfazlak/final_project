@@ -44,7 +44,7 @@ app.use(
       inputClass: 'form-control my-custom-class-name',
       placeholder: 'تاریخ',
       altFormat: 'YYYY-MM-DD HH:mm',
-      color: '#1867c0',
+      color: 'black',
       autoSubmit: false,
     }
   })
