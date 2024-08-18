@@ -19,7 +19,11 @@
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/ref/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/ref/RiskManagement.API.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/refint/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/refint/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/status/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/status/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,30 +66,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.RiskManagement.API: http.executor": "Debug",
-    "4e8fa9ce-552e-4499-8ade-8a6059b32d6a.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.smartKeys_rider",
-    "ts.external.directory.path": "/Applications/Rider.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.RiskManagement.API: http.executor&quot;: &quot;Run&quot;,
+    &quot;4e8fa9ce-552e-4499-8ade-8a6059b32d6a.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.smartKeys_rider&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/Rider.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "/Users/abolfazl/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
-      "/Users/abolfazl/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache",
-      "/Users/abolfazl/.local/share/Symbols/src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/Users/abolfazl/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/abolfazl/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache&quot;,
+      &quot;/Users/abolfazl/.local/share/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.RiskManagement.API: http">
     <configuration name="RiskManagement.API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/RiskManagement.API/RiskManagement.API.csproj" />
@@ -160,6 +164,7 @@
       <workItem from="1723312545736" duration="1120000" />
       <workItem from="1723380140146" duration="5632000" />
       <workItem from="1723488185939" duration="51903000" />
+      <workItem from="1724011624281" duration="729000" />
     </task>
     <task id="LOCAL-00001" summary="initial backend project">
       <option name="closed" value="true" />
