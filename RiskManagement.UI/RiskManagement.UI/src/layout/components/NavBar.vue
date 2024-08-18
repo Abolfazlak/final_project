@@ -453,7 +453,7 @@ watch(
   border-radius: 5px;
   border: 0.5px solid #dcdcdc;
   transition: 0.5s;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(165, 159, 149, 0.1) 0px 8px 16px;
 }
 .Navbat-Left:hover {
   border: solid 1.3px #ec622e;

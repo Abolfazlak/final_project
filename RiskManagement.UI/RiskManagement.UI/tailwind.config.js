@@ -88,7 +88,8 @@ module.exports = {
       'light-orange': '#E44600',
       'yellow': '#f1dfac',
       'textgray': '#636973',
-      'textblack': '#27303D'
+      'textblack': '#27303D',
+      'mainGreen': '#4da35a'
     },
 
     /*

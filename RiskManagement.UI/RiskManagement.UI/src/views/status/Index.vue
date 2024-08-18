@@ -65,21 +65,10 @@
 
         <template v-slot:item.actions="{ item }">
           <v-btn
-            @click="item.showBtn = !item.showBtn"
-            class="my-4 text-black"
-            size="small"
-            density="default"
-            icon="mdi-format-list-bulleted"
+            @click="tem.status == 0 ? changeStatusModal : ''"
+            :class="item.status == 0 ? 'my-enable-btn bg-mainGreen my-4 text-white' : 'disable-btn bg-grey my-4 disabled'"
             color="white"
-          ></v-btn>
-          <v-list class="absolute z-50 mr-16 -mt-16 shadow-lg rounded-lg" v-if="item.showBtn">
-            <v-list-item>
-              <v-btn class="w-20" color="warning" @click="showUpdateModal(item)">ویرایش</v-btn>
-            </v-list-item>
-            <v-list-item>
-              <v-btn class="w-20" color="red" @click="deleteSolution(item.id)"> حذف</v-btn>
-            </v-list-item>
-          </v-list>
+          >ثبت تغییرات</v-btn>
         </template>
       </v-data-table>
     </v-card>
@@ -212,6 +201,9 @@ watch(
 </script>
 
 <style>
+.disable-btn:hover{
+  cursor: default;
+}
 .v-data-table-footer__items-per-page span {
   display: none;
 }
