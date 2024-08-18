@@ -16,6 +16,7 @@ export const useUserStore = defineStore("user", {
     riskUpdateItems: null,
     updateItems: null,
     solutionUpdateItems: null,
+    changeStatusModal: false,
     createSolutionModal: false,
     updateSolutionModal: false,
     createRiskModal: false,

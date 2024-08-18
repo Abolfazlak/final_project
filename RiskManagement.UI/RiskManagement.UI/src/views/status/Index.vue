@@ -65,7 +65,7 @@
 
         <template v-slot:item.actions="{ item }">
           <v-btn
-            @click="tem.status == 0 ? changeStatusModal : ''"
+            @click="item.status == 0 ? changeStatusModal(item.id) : ''"
             :class="item.status == 0 ? 'my-enable-btn bg-mainGreen my-4 text-white' : 'disable-btn bg-grey my-4 disabled'"
             color="white"
           >ثبت تغییرات</v-btn>
@@ -73,6 +73,7 @@
       </v-data-table>
     </v-card>
   </div>
+  <change-status :isModalVisible="isModalVisibleRef" :riskId="riskId"></change-status>
 </template>
 
 <script setup>
@@ -80,6 +81,8 @@ import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/store.js'
 import moment from 'jalali-moment'
+import ChangeStatus from '@/views/status/ChangeStatus.vue'
+
 
 const user = useUserStore()
 const route = useRoute()
@@ -87,7 +90,9 @@ const route = useRoute()
 user.routeName = route.name
 
 const isCreateModalVisibleRef = ref(false)
-const isUpdateModalVisibleRef = ref(false)
+const isModalVisibleRef = ref(false)
+
+const riskId = ref(0)
 
 const token = JSON.parse(localStorage.getItem('token'))
 const search = ref('')
@@ -109,7 +114,6 @@ const headers = [
 const serverItems = ref([])
 const loading = ref(true)
 const totalItems = ref(0)
-const updateItems = ref(null)
 
 const projectId = route.params.id
 
@@ -119,20 +123,15 @@ const loadItems = ({ page, itemsPerPage, sortBy }) => {
   getAllRiskStatus(projectId)
 }
 
-function showCreateModal() {
-  user.createSolutionModal = true
-  isCreateModalVisibleRef.value = true
-}
-
 function persianTimeInput(date) {
   return moment(new Date(date)).locale('fa').format('YYYY/MM/DD HH:mm')
 }
 
-function showUpdateModal(item) {
-  user.updateSolutionModal = true
-  isUpdateModalVisibleRef.value = true
-  user.solutionUpdateItems = item
-  updateItems.value = item
+function changeStatusModal(id) {
+  user.changeStatusModal = true
+  isModalVisibleRef.value = true
+  console.log('id', id)
+  riskId.value = id
 }
 
 function loader() {
@@ -183,21 +182,15 @@ watch(
 )
 
 watch(
-  () => user.updateSolutionModal,
+  () => user.changeStatusModal,
   async (newval) => {
-    isUpdateModalVisibleRef.value = newval
+    isModalVisibleRef.value = newval
     if (newval == false) {
       loader()
     }
   }
 )
 
-watch(
-  () => user.solutionUpdateItems,
-  async (newval) => {
-    updateItems.value = newval
-  }
-)
 </script>
 
 <style>
