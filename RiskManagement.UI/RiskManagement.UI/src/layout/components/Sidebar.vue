@@ -1,5 +1,5 @@
 <template>
-  <div class="sideBarContainer">
+  <div :class="routName == 'report' ? 'sideBarContainer' : 'sideBarContainer-sp' ">
     <div class="sideBarContainer-top">
       <div
         v-for="item in items"
@@ -35,6 +35,20 @@
   padding: 50px 0px;
   justify-content: space-between;
 }
+
+.sideBarContainer-sp {
+  /* background-color: #f2f2f2; */
+  background-color: #f9f9f9;
+  width: 360px;
+  height: 92vh;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 20px 10px 2px;
+  margin-top: -1vh;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0px;
+  justify-content: space-between;
+}
+
 .sideBarContainer-top {
   display: flex;
   flex-direction: column;
