@@ -116,6 +116,9 @@ async function createSolution() {
       },
       body: JSON.stringify(createModel)
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       toast.success(response.data)
     })

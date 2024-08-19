@@ -73,6 +73,9 @@ async function getReports(id) {
         Authorization: 'Bearer ' + token
       }
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       console.log('response-getReports', response)
       res.value = response

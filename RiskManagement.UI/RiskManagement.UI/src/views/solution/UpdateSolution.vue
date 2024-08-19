@@ -82,6 +82,9 @@ async function updateSolution() {
       },
       body: JSON.stringify(updateModel)
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       closeUpdateModal()
       toast.success(response.data)

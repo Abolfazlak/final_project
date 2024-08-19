@@ -129,6 +129,9 @@ async function getUsers() {
         Authorization: 'Bearer ' + token
       }
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       people.value = response.data
     })
@@ -148,6 +151,9 @@ async function createProject() {
       },
       body: JSON.stringify(createModel)
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       toast.success(response.message)
     })

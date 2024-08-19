@@ -278,6 +278,9 @@ async function addRiskDetails() {
       },
       body: JSON.stringify(riskDetailModel)
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       toast.success(response.data)
     })
@@ -327,6 +330,9 @@ async function updateRiskDetails() {
       },
       body: JSON.stringify(riskDetailModel)
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       toast.success(response.data)
     })
@@ -345,6 +351,9 @@ async function getRiskDetail(riskId) {
         Authorization: 'Bearer ' + token
       }
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     if (res.status == 404) {
       riskDetailModel.isOpportunity = false
     }
@@ -369,6 +378,9 @@ async function getMethodology(id) {
         Authorization: 'Bearer ' + token
       }
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       methodologyRef.value = response.data
     })

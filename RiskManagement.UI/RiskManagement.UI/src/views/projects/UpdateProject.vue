@@ -114,6 +114,9 @@ async function updateProject() {
       },
       body: JSON.stringify(updateModel)
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       closeUpdateModal()
       toast.success(response.message)
@@ -135,6 +138,9 @@ async function getUsers() {
         Authorization: 'Bearer ' + token
       }
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
         people.value = response.data      
     })

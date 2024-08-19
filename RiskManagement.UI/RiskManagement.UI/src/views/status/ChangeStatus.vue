@@ -196,6 +196,9 @@ async function changeStatus() {
       },
       body: JSON.stringify(model)
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       toast.success(response.data)
       closeModal()

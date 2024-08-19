@@ -111,6 +111,9 @@ async function getMainCategories() {
         Authorization: 'Bearer ' + token
       }
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       mainCategories.value = response.data
     })
@@ -129,6 +132,9 @@ async function getSecondaryRiskCategories(id) {
         Authorization: 'Bearer ' + token
       }
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       secondaryRiskCategories.value = response.data
     })
@@ -151,6 +157,9 @@ async function updateRisk() {
       },
       body: JSON.stringify(updateItems.value)
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       toast.success(response.data)
     })

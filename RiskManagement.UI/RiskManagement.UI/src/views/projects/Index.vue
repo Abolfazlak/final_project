@@ -110,6 +110,9 @@ async function deleteItem(id) {
         Authorization: 'Bearer ' + token
       }
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       console.log('response-getProjects', response)
       toast.success(response.message)
@@ -130,6 +133,9 @@ async function getAllProjects() {
         Authorization: 'Bearer ' + token
       }
     })
+    if(res.status == 401){
+      user.Logout();
+    }
     await res.json().then((response) => {
       console.log('response-getProjects', response)
       projects.value = response.data
