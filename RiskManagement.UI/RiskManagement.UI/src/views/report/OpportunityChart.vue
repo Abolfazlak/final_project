@@ -44,9 +44,9 @@ function getColor(row, col) {
   // Custom function to return colors based on row and column indices
   // You can use any logic to determine the color
   const colors = [
-    ['#35B08B', '#94CD8B', '#FEEA81'],
-    ['#94CD8B', '#FEEA81', '#FEEA81'],
-    ['#FEEA81', '#FEEA81', 'aqua']
+    ['green', '#94CD8B', 'yellow'],
+    ['#94CD8B', 'orange', '#f54444e1'],
+    ['yellow', '#f54444e1', 'red']
   ]
   return colors[row][col] || 'red'
 }

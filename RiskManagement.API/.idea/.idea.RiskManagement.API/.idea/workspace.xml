@@ -9,21 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5047cee-2883-45cb-8a0f-d83a92f75164" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RiskManagement.API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RiskManagement.API/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/bin/Debug/net8.0/RiskManagement.API.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/RiskManagement.API.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/ref/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/ref/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/refint/RiskManagement.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/obj/Debug/net8.0/refint/RiskManagement.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.Test/obj/Debug/net8.0/RiskManagement.Test.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/report/RiskChart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/report/RiskChart.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,6 +151,7 @@
       <workItem from="1723380140146" duration="5632000" />
       <workItem from="1723488185939" duration="51903000" />
       <workItem from="1724011624281" duration="729000" />
+      <workItem from="1724015076653" duration="657000" />
     </task>
     <task id="LOCAL-00001" summary="initial backend project">
       <option name="closed" value="true" />

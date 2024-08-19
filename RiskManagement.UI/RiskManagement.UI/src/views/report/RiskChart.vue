@@ -26,7 +26,7 @@ user.routeName = route.name
 
 const props = defineProps(['data'])
 
-let chartData = ref([]);
+let chartData = ref([])
 
 watch(
   () => props.data,
@@ -44,12 +44,14 @@ function getColor(row, col) {
   // Custom function to return colors based on row and column indices
   // You can use any logic to determine the color
   const colors = [
-    ['#35B08B', '#94CD8B', '#FEEA81', '#FEEA81', 'aqua'],
-    ['#94CD8B', '#FEEA81', '#FEEA81', 'aqua', 'aqua'],
-    ['#FEEA81', '#FEEA81', 'aqua', 'aqua', 'aqua'],
-    ['#FEEA81', 'aqua', 'aqua', 'aqua', 'aqua'],
-    ['aqua', 'aqua', 'aqua', 'aqua', 'aqua']
+    ['green', '#008000d9', '#0080009f', '#e1ff00b5', 'yellow'],
+    ['#008000d9', '#008000bc', '#ffff00b0', '#ffdd00cb', 'orange'],
+    ['#0080009f', '#ffff00b0', '#ffa600c5', 'orange', '#ff0000aa'],
+    ['#ffff00b0', '#ffa600c5', 'orange', '#ff0000bc', '#ff0000d9'],
+    ['yellow', '#ffa600c5', '#ff0000aa', '#ff0000d9', 'red']
   ]
-  return colors[row][col] || 'red';
+  return colors[row][col] || 'red'
 }
 </script>
+
+<style></style>
