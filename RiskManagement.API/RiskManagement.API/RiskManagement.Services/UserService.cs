@@ -255,6 +255,55 @@ public class UserService(ICommonHelper helper, IUserRepo userRepo) : IUserServic
             };
         }
     }
+
+
+    public async Task<ResponseMessage<string>> ChangePassword(PasswordDto dto)
+    {
+        try
+        {
+            var user = await userRepo.GetUserByّId(dto.Id);
+
+            if (user == null)
+            {
+                return new ResponseMessage<string>
+                {
+                    Code = 404,
+                    Content = ""
+                };
+            }
+            
+            var checkPass = CheckPassword(dto.OldPassword, user.Password);
+
+            if (!checkPass)
+            {
+                return new ResponseMessage<string>
+                {
+                    Code = 401,
+                    Content = "گذرواژه را بدرستی وارد نمایید"
+                };
+            }
+            var pass = helper.GetHash(dto.NewPassword);
+
+            user.Password = pass;
+
+            await userRepo.UpdateUser(user);
+            
+            return new ResponseMessage<string>
+            {
+                Code = 200,
+                Content = "عملیات با موفقیت انجام شد!"
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<string>
+            {
+                Code = 500,
+                Content = "عملیات با خطا مواجه شد!"
+            };
+        }
+    }
+
     
     /*
      *

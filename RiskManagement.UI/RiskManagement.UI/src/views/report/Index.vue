@@ -3,21 +3,21 @@
     <div class="flex flex-row gap-12 justify-center mt-16">
       <div class="reportContiner flex flex-col justify-center items-center  w-2/5 px-16">
         <div class="flex mb-6 text-xl text-black font-bold">ماتریس احتمال - شدت ریسک</div>
-        <risk-chart :data="riskData"></risk-chart>
+        <risk-chart></risk-chart>
       </div>
       <div class="reportContiner flex flex-col justify-center items-center  w-2/5 px-16">
-        <div class="flex mb-6 text-xl text-black font-bold">نمودار وضعیت ریسک‌ها</div>
-        <risk-status-chart></risk-status-chart>
+        <div class="flex mb-6 text-xl text-black font-bold">نمودار وضعیت ریسک‌ها و فرصت‌ها</div>
+        <risk-status-chart  v-if="user.pichartData"></risk-status-chart>
       </div>
     </div>
     <div class="flex flex-row gap-12 justify-center mt-16 pb-8">
       <div class="reportContiner flex flex-col justify-center items-center  w-2/5 px-16">
         <div class="flex mb-6 text-xl text-black font-bold">ماتریس احتمال - شدت فرصت</div>
-        <opportunity-chart :data="oppData"></opportunity-chart>
+        <opportunity-chart v-if="user.oppData"></opportunity-chart>
       </div>
       <div class="reportContiner flex flex-col justify-center items-center w-2/5 px-16" v-if="Object.keys(rupData).length !== 0">
         <div class="flex mb-6 text-xl text-black font-bold">نمودار فازهای آبشاری</div>
-        <rup-chart></rup-chart>
+        <rup-chart v-if="user.rupchartData"></rup-chart>
       </div>
       <div class="flex flex-col justify-center items-center w-2/5 px-16" v-else></div>
     </div>
@@ -30,29 +30,64 @@ import RiskChart from './RiskChart.vue'
 import RiskStatusChart from './RiskStatusChart.vue'
 import OpportunityChart from './OpportunityChart.vue'
 import RupChart from './RupChart.vue'
+import { ref } from 'vue'
 
 const user = useUserStore()
 const route = useRoute()
 
 user.routeName = route.name
 
-const riskData = [
-  [1, 2, 1, 1, 1],
-  [2, 1, 1, 5, 1],
-  [1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1]
-]
+const projectId = route.params.id
 
-const oppData = [
-  [1, 2, 1],
-  [2, 1, 1],
-  [1, 1, 1]
-]
 
-const statusData = [10, 5, 3]
+// const riskData = [
+//   [1, 2, 1, 1, 1],
+//   [2, 1, 1, 5, 1],
+//   [1, 1, 1, 1, 1],
+//   [1, 1, 1, 1, 1],
+//   [1, 1, 1, 1, 1]
+// ]
 
-const rupData = {}
+const riskData = ref([])
+
+// const oppData = [
+//   [1, 2, 1],
+//   [2, 1, 1],
+//   [1, 1, 1]
+// ]
+
+
+let rupData = {}
+
+const res = ref(null)
+let token = JSON.parse(localStorage.getItem('token'))
+
+
+async function getReports(id) {
+  let url = `${user.url}report/getReport?id=${id}`
+  try {
+    let res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    })
+    await res.json().then((response) => {
+      console.log('response-getReports', response)
+      res.value = response
+      user.riskData = response.risks
+      user.oppData = response.opportunities
+      user.pichartData = [response.status[0], response.status[1], response.status[2]]
+      user.rupchartData = response.rup
+      rupData = response.rup
+    })
+  } catch (error) {
+    console.log('response-getReports', error)
+  }
+}
+
+getReports(projectId)
 
 </script>
 <style>

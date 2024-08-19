@@ -1,7 +1,8 @@
 <template>
-  <div v-if="data.length && data[0].length" class="w-full">
+  <!-- v-if="chartData.length && chartData[0].length" -->
+  <div  class="w-full">
     <div class="RC-Matrix">
-      <div class="RC-Matrix-Row" v-for="(row, rowIndex) in data" :key="rowIndex">
+      <div class="RC-Matrix-Row" v-for="(row, rowIndex) in user.riskData" :key="rowIndex">
         <div
           v-for="(item, columnIndex) in row"
           :key="columnIndex"
@@ -25,20 +26,6 @@ const route = useRoute()
 user.routeName = route.name
 
 const props = defineProps(['data'])
-
-let chartData = ref([])
-
-watch(
-  () => props.data,
-  (newval) => {
-    if (newval && Array.isArray(newval) && newval.length > 0) {
-      chartData.val = newval
-    } else {
-      data = []
-    }
-    console.log('data', data)
-  }
-)
 
 function getColor(row, col) {
   // Custom function to return colors based on row and column indices

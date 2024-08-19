@@ -9,6 +9,10 @@ export const useUserStore = defineStore("user", {
     user: {
 
     },
+    oppData: [],
+    riskData: [],
+    rupchartData: [],
+    pichartData: [],
     routeName: null,
     route: useRoute(),
     router: useRouter(),

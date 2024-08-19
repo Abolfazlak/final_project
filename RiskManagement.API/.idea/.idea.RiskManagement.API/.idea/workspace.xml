@@ -9,7 +9,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5047cee-2883-45cb-8a0f-d83a92f75164" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RiskManagement.API/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RiskManagement.API/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Models/Users/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Models/Users/UserDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/UserModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Modules/UserModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/Interfaces/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RiskManagement.API/RiskManagement.Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/stores/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/stores/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/report/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/report/Index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/report/RiskChart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/report/RiskChart.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/report/RiskStatusChart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../RiskManagement.UI/RiskManagement.UI/src/views/report/RiskStatusChart.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +159,7 @@
       <workItem from="1723380140146" duration="5632000" />
       <workItem from="1723488185939" duration="51903000" />
       <workItem from="1724011624281" duration="729000" />
-      <workItem from="1724015076653" duration="657000" />
+      <workItem from="1724015076653" duration="2892000" />
     </task>
     <task id="LOCAL-00001" summary="initial backend project">
       <option name="closed" value="true" />

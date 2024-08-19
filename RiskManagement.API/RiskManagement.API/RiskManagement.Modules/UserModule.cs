@@ -103,5 +103,16 @@ public class UserModule : CarterModule
                 _  => Results.Problem("عملیات با خطا مواجه شد")
             };
         });
+        
+        app.MapPost("/users/changePassword", async (IUserService service, PasswordDto dto) =>
+        {
+            var res = await service.ChangePassword(dto);
+            return res.Code switch
+            {
+                200 => Results.Ok(new { Data = res.Content }),
+                404 => Results.NotFound(),
+                _  => Results.Problem("عملیات با خطا مواجه شد")
+            };
+        });
     }
 }
