@@ -29,6 +29,7 @@
         </div>
       </v-card-title>
       <v-data-table
+      v-if="user.hasRiskSolutionsData"
         class="table-content px-8 pb-2"
         v-model:search="search"
         :headers="headers"
@@ -67,6 +68,8 @@
           </v-list>
         </template>
       </v-data-table>
+      <div v-else class="flex justify-center text-center mt-24 pb-128 text-xl"> داده‌ای جهت نمایش وجود ندارد</div>
+
     </v-card>
   </div>
 
@@ -89,6 +92,7 @@ const user = useUserStore()
 const route = useRoute()
 
 user.routeName = 'risks'
+user.hasRiskSolutionsData = true
 
 const isCreateModalVisibleRef = ref(false)
 const isUpdateModalVisibleRef = ref(false)
@@ -147,10 +151,14 @@ const getAllSolutions = async (id) => {
         Authorization: 'Bearer ' + token
       }
     })
+    if (res.status == 404) {
+      user.hasRiskSolutionsData = false
+    }
     const response = await res.json()
     serverItems.value = response.data
     totalItems.value = response.data.length
     loading.value = false
+
   } catch (error) {
     console.log('response-getAllSolutions', error)
   }
@@ -235,7 +243,7 @@ watch(
 }
 
 .table-content {
-  height: 69vh;
+  height: 71vh;
   overflow-y: auto;
 }
 

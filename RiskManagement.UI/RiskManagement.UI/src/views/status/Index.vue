@@ -24,6 +24,7 @@
         </div>
       </v-card-title>
       <v-data-table
+        v-if="user.hasRiskStatusData"
         class="table-content px-8"
         v-model:search="search"
         :headers="headers"
@@ -66,11 +67,17 @@
         <template v-slot:item.actions="{ item }">
           <v-btn
             @click="item.status == 0 ? changeStatusModal(item.id) : ''"
-            :class="item.status == 0 ? 'my-enable-btn bg-mainGreen my-4 text-white' : 'disable-btn bg-grey my-4 disabled'"
+            :class="
+              item.status == 0
+                ? 'my-enable-btn bg-mainGreen my-4 text-white'
+                : 'disable-btn bg-grey my-4 disabled'
+            "
             color="white"
-          >ثبت تغییرات</v-btn>
+            >ثبت تغییرات</v-btn
+          >
         </template>
       </v-data-table>
+      <div v-else class="flex justify-center text-center mt-24 pb-128 text-xl"> داده‌ای جهت نمایش وجود ندارد</div>
     </v-card>
   </div>
   <change-status :isModalVisible="isModalVisibleRef" :riskId="riskId"></change-status>
@@ -83,11 +90,11 @@ import { useUserStore } from '@/stores/store.js'
 import moment from 'jalali-moment'
 import ChangeStatus from '@/views/status/ChangeStatus.vue'
 
-
 const user = useUserStore()
 const route = useRoute()
 
 user.routeName = route.name
+user.hasRiskStatusData = true
 
 const isCreateModalVisibleRef = ref(false)
 const isModalVisibleRef = ref(false)
@@ -152,6 +159,9 @@ const getAllRiskStatus = async (id) => {
         Authorization: 'Bearer ' + token
       }
     })
+    if (res.status == 404) {
+      user.hasRiskStatusData = false
+    }
     const response = await res.json()
     serverItems.value = response.data
     totalItems.value = response.data.length
@@ -190,11 +200,10 @@ watch(
     }
   }
 )
-
 </script>
 
 <style>
-.disable-btn:hover{
+.disable-btn:hover {
   cursor: default;
 }
 .v-data-table-footer__items-per-page span {

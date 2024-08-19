@@ -27,7 +27,7 @@
   /* background-color: #f2f2f2; */
   background-color: #f9f9f9;
   width: 360px;
-  height: 92vh;
+  height: 91vh;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 20px 10px 2px;
   margin-top: -1vh;
   display: flex;
@@ -40,7 +40,7 @@
   /* background-color: #f2f2f2; */
   background-color: #f9f9f9;
   width: 360px;
-  height: 92vh;
+  height: 91vh;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 20px 10px 2px;
   margin-top: -1vh;
   display: flex;

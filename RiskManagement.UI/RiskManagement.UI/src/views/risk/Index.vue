@@ -29,6 +29,7 @@
         </div>
       </v-card-title>
       <v-data-table
+        v-if="user.hasRiskData"
         class="table-content px-8 pb-2"
         v-model:search="search"
         :headers="headers"
@@ -73,6 +74,7 @@
           </v-list>
         </template>
       </v-data-table>
+      <div v-else class="flex justify-center text-center mt-24 pb-128 text-xl"> داده‌ای جهت نمایش وجود ندارد</div>
     </v-card>
   </div>
 
@@ -121,6 +123,7 @@ const loading = ref(true)
 const totalItems = ref(0)
 const updateItems = ref(null)
 const riskIdRef = ref(0)
+user.hasRiskData = true
 
 const loadItems = ({ page, itemsPerPage, sortBy }) => {
   currentPage.value = page // Track the current page
@@ -165,6 +168,9 @@ const getAllRisks = async (id) => {
         Authorization: 'Bearer ' + token
       }
     })
+    if (res.status == 404) {
+      user.hasRiskData = false
+    }
     const response = await res.json()
     serverItems.value = response.data
     totalItems.value = response.data.length
@@ -272,4 +278,5 @@ watch(
   justify-content: center;
   align-items: center;
 }
+
 </style>
