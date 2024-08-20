@@ -104,6 +104,17 @@ public class UserModule : CarterModule
             };
         });
         
+        app.MapPost("/users/deactivateUser", async (IUserService service, long id) =>
+        {
+            var res = await service.UpdateUserService(id);
+            return res.Code switch
+            {
+                200 => Results.Ok(new { Data = res.Content }),
+                404 => Results.NotFound(),
+                _  => Results.Problem("عملیات با خطا مواجه شد")
+            };
+        });
+        
         app.MapPost("/users/changePassword", async (IUserService service, PasswordDto dto) =>
         {
             var res = await service.ChangePassword(dto);

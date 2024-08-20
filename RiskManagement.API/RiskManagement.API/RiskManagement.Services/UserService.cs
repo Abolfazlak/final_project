@@ -255,6 +255,41 @@ public class UserService(ICommonHelper helper, IUserRepo userRepo) : IUserServic
             };
         }
     }
+    
+    public async Task<ResponseMessage<string>> UpdateUserService(long id)
+    {
+        try
+        {
+            var user = await userRepo.GetUserByّId(id);
+
+            if (user == null)
+            {
+                return new ResponseMessage<string>
+                {
+                    Code = 404,
+                    Content = ""
+                };
+            }
+
+            user.IsActive = false;
+
+            await userRepo.UpdateUser(user);
+            
+            return new ResponseMessage<string>
+            {
+                Code = 200,
+                Content = "عملیات با موفقیت انجام شد!"
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<string>
+            {
+                Code = 500,
+                Content = "عملیات با خطا مواجه شد!" + e.Message
+            };
+        }
+    }
 
 
     public async Task<ResponseMessage<string>> ChangePassword(PasswordDto dto)

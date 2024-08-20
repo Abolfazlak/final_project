@@ -33,10 +33,6 @@
         item-value="id"
         @update:options="loadItems"
       >
-        <template v-slot:item.rowNumber="{ index }">
-          {{ index + 1 + itemsPerPage * (currentPage - 1) }}
-        </template>
-
         <!-- Format the amount with commas and add the ریال symbol -->
         <template v-slot:item.estimatedAmount="{ item }">
           {{ formatCurrency(item.estimatedAmount) }}
@@ -50,30 +46,56 @@
           {{ persianTimeInput(item.estimatedFinishedDate) }}
         </template>
 
+        <template v-slot:item.isActive="{ item }">
+          <div v-if="item.isActive" class="text-green">فعال</div>
+          <div v-if="!item.isActive" class="text-red">'غیرفعال'</div>
+        </template>
+
         <template v-slot:item.finishedDate="{ item }">
-          {{ persianTimeInput(item.finishedDate) }}
+          <div v-if="item.finishedDate != null">
+            {{ persianTimeInput(item.finishedDate) }}
+          </div>
         </template>
 
-        <template v-slot:item.status="{ item }">
-          <div v-if="item.status == 0" class="text-black">نامشخص</div>
-          <div v-if="item.status == 1" class="text-red">اتفاق افتاد</div>
-          <div v-if="item.status == 2" class="text-green">اتفاق نیفتاد</div>
+        <template v-slot:item.rowNumber="{ index }">
+          {{ index + 1 + itemsPerPage * (currentPage - 1) }}
         </template>
-
         <template v-slot:item.actions="{ item }">
           <v-btn
-            @click="item.status == 0 ? changeStatusModal(item.id) : ''"
-            :class="
-              item.status == 0
-                ? 'my-enable-btn bg-mainGreen my-4 text-white'
-                : 'disable-btn bg-grey my-4 disabled'
-            "
+            @click="item.showBtn = !item.showBtn"
+            class="my-4 text-black"
+            size="small"
+            density="default"
+            icon="mdi-format-list-bulleted"
             color="white"
-            >ثبت تغییرات</v-btn
-          >
+          ></v-btn>
+          <v-list class="absolute z-50 mr-16 -mt-16 shadow-lg rounded-lg" v-if="item.showBtn">
+            <v-list-item
+              ><v-btn class="w-20" color="#77817E" @click="showDetailsModal(item.id)"
+                >جزيیات</v-btn
+              ></v-list-item
+            >
+            <v-list-item>
+              <v-btn class="w-20 text-white" color="#4da35a" @click="gotoSolutions(item.id)"
+                >راه‌حل‌ها</v-btn
+              ></v-list-item
+            >
+            <v-list-item>
+              <v-btn class="w-20" color="#EC622E" @click="showUpdateModal(item)">
+                ویرایش</v-btn
+              ></v-list-item
+            >
+            <v-list-item>
+              <v-btn class="w-20" variant="outlined" color="red" @click="deleteRisk(item.id)">
+                حذف</v-btn
+              ></v-list-item
+            >
+          </v-list>
         </template>
       </v-data-table>
-      <div v-else class="flex justify-center text-center mt-24 pb-128 text-xl"> داده‌ای جهت نمایش وجود ندارد</div>
+      <div v-else class="flex justify-center text-center mt-24 pb-128 text-xl">
+        داده‌ای جهت نمایش وجود ندارد
+      </div>
     </v-card>
   </div>
   <change-status :isModalVisible="isModalVisibleRef" :riskId="riskId"></change-status>
@@ -90,7 +112,7 @@ const user = useUserStore()
 const route = useRoute()
 
 user.routeName = route.name
-user.hasRiskStatusData = true
+user.hasSettingData = true
 
 const isCreateModalVisibleRef = ref(false)
 const isModalVisibleRef = ref(false)
@@ -104,13 +126,10 @@ const currentPage = ref(1)
 
 const headers = [
   { title: 'ردیف', align: 'center', sortable: false, key: 'rowNumber' },
-  { title: 'عنوان ', key: 'title', align: 'start' },
-  { title: 'وضعیت', key: 'status', align: 'start' },
-  { title: 'تاریخ پیش‌بینی شده', key: 'estimatedFinishedDate', align: 'start' },
-  { title: 'تاریخ رخداد', key: 'finishedDate', align: 'start' },
-  { title: 'هزینه پیش‌بینی شده', key: 'estimatedAmount', align: 'start' },
-  { title: 'هزینه نهایی', key: 'finalAmount', align: 'start' },
-  { title: 'راه حل انتخابی', key: 'bestSolution.description', align: 'start' },
+  { title: 'نام و نام خانودگی', key: 'fullName', align: 'start' },
+  { title: 'نام کاربری', key: 'userName', align: 'start' },
+  { title: 'ایمیل', key: 'email', align: 'start' },
+  { title: 'وضعیت', key: 'isActive', align: 'start' },
   { title: '', key: 'actions', sortable: false }
 ]
 
@@ -123,7 +142,7 @@ const projectId = route.params.id
 const loadItems = ({ page, itemsPerPage, sortBy }) => {
   currentPage.value = page // Track the current page
   loading.value = true
-  getAllRiskStatus(projectId)
+  getAllRiskStatus()
 }
 
 function persianTimeInput(date) {
@@ -145,8 +164,8 @@ function loader() {
   })
 }
 
-const getAllRiskStatus = async (id) => {
-  const url = `${user.url}risk/status/getAllRiskStatusByProjectId?id=${id}`
+const getAllRiskStatus = async () => {
+  const url = `${user.url}users/getAllUsers`
   try {
     const res = await fetch(url, {
       method: 'GET',
@@ -156,7 +175,7 @@ const getAllRiskStatus = async (id) => {
       }
     })
     if (res.status == 404) {
-      user.hasRiskStatusData = false
+      user.hasSettingData = false
     }
     const response = await res.json()
     serverItems.value = response.data

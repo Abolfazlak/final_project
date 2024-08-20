@@ -49,6 +49,7 @@ public class UserRepo(RiskManagementDbContext context) : IUserRepo
                 FullName = u.FullName,
                 Email = u.Email,
                 PhoneNumber = u.PhoneNumber,
+                IsActive = u.IsActive
             }).ToListAsync();
     }
     

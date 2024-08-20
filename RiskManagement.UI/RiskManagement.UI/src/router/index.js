@@ -55,6 +55,14 @@ const router = createRouter({
       meta: {
         layout: PanelLayout
       }
+    },
+    {
+      path: '/setting/:id',
+      name: 'setting',
+      component:() => import('@/views/setting/Index.vue'),
+      meta: {
+        layout: PanelLayout
+      }
     }
 
   ]

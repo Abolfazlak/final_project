@@ -1,4 +1,5 @@
 using RiskManagement.API.RiskManagement.Models;
+using RiskManagement.API.RiskManagement.Models.Risks;
 using RiskManagement.API.RiskManagement.Repositories.Interfaces;
 using RiskManagement.API.RiskManagement.Services.Interfaces;
 using Exception = System.Exception;
@@ -69,6 +70,28 @@ public class ReportService(IReportRepo repo) : IReportService
             {
                 Code = 500,
                 Content = new Dictionary<int, int>()
+            };
+        }
+    }
+    
+    public async Task<ResponseMessage<List<RiskAmountSummary>>> GetRiskAmountSummariesAsync(long id)
+    {
+        try
+        {
+            var list = await repo.GetRiskAmountSummariesAsync(id);
+            
+            return new ResponseMessage<List<RiskAmountSummary>>
+            {
+                Code = 200,
+                Content = list
+            };
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<List<RiskAmountSummary>>
+            {
+                Code = 500,
+                Content = []
             };
         }
     }

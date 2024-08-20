@@ -9,6 +9,7 @@ export const useUserStore = defineStore("user", {
     user: {
 
     },
+    hasSettingData:true,
     hasRiskData: true,
     hasRiskDetailsData: true,
     hasRiskSolutionsData: true,

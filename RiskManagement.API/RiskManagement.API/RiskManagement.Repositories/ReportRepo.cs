@@ -1,11 +1,28 @@
 using Microsoft.EntityFrameworkCore;
 using RiskManagement.API.RiskManagement.DataProvide;
+using RiskManagement.API.RiskManagement.Models.Risks;
 using RiskManagement.API.RiskManagement.Repositories.Interfaces;
 
 namespace RiskManagement.API.RiskManagement.Repositories;
 
 public class ReportRepo(RiskManagementDbContext context) : IReportRepo
 {
+    public async Task<List<RiskAmountSummary>> GetRiskAmountSummariesAsync(long id)
+    {
+        var riskAmountSummaries = await context.Risks
+            .Where(r => r.ProjectId == id)
+            .GroupBy(r => r.Status)
+            .Select(g => new RiskAmountSummary
+            {
+                Status = g.Key,
+                SumOfFinalAmount = g.Sum(r => r.FinalAmount ?? 0),
+                SumOfEstimatedAmount = g.Sum(r => r.RiskDetails.Sum(rd => rd.EstimatedRiskAmount))
+            })
+            .ToListAsync();
+
+        return riskAmountSummaries;
+    }
+    
     public async Task<int[,]> GetRiskCountsGrid(long id)
     {
         var riskGrid = new int[5, 5]; // 5x5 grid initialized to 0

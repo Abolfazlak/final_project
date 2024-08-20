@@ -1,5 +1,6 @@
 using Carter;
 using Microsoft.AspNetCore.Authorization;
+using RiskManagement.API.RiskManagement.Models.Risks;
 using RiskManagement.API.RiskManagement.Services.Interfaces;
 
 namespace RiskManagement.API.RiskManagement.Modules;
@@ -8,7 +9,6 @@ public class ReportModule : CarterModule
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-
         app.MapGet("/report/getReport", [Authorize] async (IReportService service, long id) =>
         {
             try
@@ -17,7 +17,14 @@ public class ReportModule : CarterModule
                 var opportunities = new int[][] { };
                 var status = new Dictionary<int, int> { };
                 var rup = new Dictionary<string, int> { };
-
+                var amount = new List<RiskAmountSummary>();
+                
+                var amountService = await service.GetRiskAmountSummariesAsync(id);
+                if (amountService.Code == 200)
+                {
+                    amount = amountService.Content;
+                }
+                
                 var risksService = await service.GetRiskMatrixById(id);
                 if (risksService.Code == 200)
                 {
@@ -47,7 +54,8 @@ public class ReportModule : CarterModule
                     Risks = risks,
                     Opportunities = opportunities,
                     Status = status,
-                    Rup = rup
+                    Rup = rup,
+                    Amount = amount
                 });
 
             }

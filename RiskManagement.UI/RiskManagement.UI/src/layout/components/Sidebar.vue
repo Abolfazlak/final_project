@@ -111,7 +111,7 @@ function routeToPages(name) {
   if (name == 'projects') {
     router.push({ name: name })
   } else if (name == 'setting') {
-    router.push({ name: name })
+    router.push({ name: name, params: { id: id } })
   } else {
     router.push({ name: name, params: { id: id } })
   }
