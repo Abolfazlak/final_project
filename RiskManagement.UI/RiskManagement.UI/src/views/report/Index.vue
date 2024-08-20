@@ -1,25 +1,24 @@
 <template>
   <div>
     <div class="flex flex-row gap-12 justify-center mt-16">
-      <div class="reportContiner flex flex-col justify-center items-center  w-2/5 px-16">
+      <div class="reportContiner flex flex-col justify-center items-center w-2/5 px-16">
         <div class="flex mb-6 text-xl text-black font-bold">ماتریس احتمال - شدت ریسک</div>
         <risk-chart></risk-chart>
       </div>
-      <div class="reportContiner flex flex-col justify-center items-center  w-2/5 px-16">
+      <div class="reportContiner flex flex-col justify-center items-center w-2/5 px-16">
         <div class="flex mb-6 text-xl text-black font-bold">نمودار وضعیت ریسک‌ها و فرصت‌ها</div>
-        <risk-status-chart  v-if="user.pichartData"></risk-status-chart>
+        <risk-status-chart v-if="user.pichartData"></risk-status-chart>
       </div>
     </div>
     <div class="flex flex-row gap-12 justify-center mt-16 pb-8">
-      <div class="reportContiner flex flex-col justify-center items-center  w-2/5 px-16">
+      <div class="reportContiner flex flex-col justify-center items-center w-2/5 px-16">
         <div class="flex mb-6 text-xl text-black font-bold">ماتریس احتمال - شدت فرصت</div>
         <opportunity-chart v-if="user.oppData"></opportunity-chart>
       </div>
-      <div class="reportContiner flex flex-col justify-center items-center w-2/5 px-16" v-if="Object.keys(rupData).length !== 0">
-        <div class="flex mb-6 text-xl text-black font-bold">نمودار فازهای آبشاری</div>
-        <rup-chart v-if="user.rupchartData"></rup-chart>
+      <div class="reportContiner flex flex-col justify-center items-center w-2/5 px-16">
+        <div class="flex mb-6 text-xl text-black font-bold">نمودار هزینه </div>
+        <bar-chart v-if="user.amountData"></bar-chart>
       </div>
-      <div class="flex flex-col justify-center items-center w-2/5 px-16" v-else></div>
     </div>
   </div>
 </template>
@@ -27,10 +26,11 @@
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/store.js'
 import RiskChart from './RiskChart.vue'
+import BarChart from './BarChart.vue'
 import RiskStatusChart from './RiskStatusChart.vue'
 import OpportunityChart from './OpportunityChart.vue'
 import RupChart from './RupChart.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const user = useUserStore()
 const route = useRoute()
@@ -38,7 +38,6 @@ const route = useRoute()
 user.routeName = route.name
 
 const projectId = route.params.id
-
 
 // const riskData = [
 //   [1, 2, 1, 1, 1],
@@ -56,12 +55,10 @@ const riskData = ref([])
 //   [1, 1, 1]
 // ]
 
-
 let rupData = {}
 
 const res = ref(null)
 let token = JSON.parse(localStorage.getItem('token'))
-
 
 async function getReports(id) {
   let url = `${user.url}report/getReport?id=${id}`
@@ -73,8 +70,8 @@ async function getReports(id) {
         Authorization: 'Bearer ' + token
       }
     })
-    if(res.status == 401){
-      user.Logout();
+    if (res.status == 401) {
+      user.Logout()
     }
     await res.json().then((response) => {
       console.log('response-getReports', response)
@@ -83,6 +80,8 @@ async function getReports(id) {
       user.oppData = response.opportunities
       user.pichartData = [response.status[0], response.status[1], response.status[2]]
       user.rupchartData = response.rup
+      user.amountData = response.amount
+
       rupData = response.rup
     })
   } catch (error) {
@@ -91,14 +90,12 @@ async function getReports(id) {
 }
 
 getReports(projectId)
-
 </script>
 <style>
 .reportContiner {
   height: 70vh !important;
   background-color: white;
   box-shadow: rgba(165, 159, 149, 0.3) 0px 8px 16px;
-
 }
 .RC-Matrix {
   display: flex;

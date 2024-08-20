@@ -1,0 +1,76 @@
+<template>
+  <div>
+    <canvas ref="chartCanvas"></canvas>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import { Chart } from 'chart.js/auto'
+import { useUserStore } from '@/stores/store.js'
+
+const chartCanvas = ref(null)
+const user = useUserStore()
+
+const amount = ref(null)
+
+function loader(){
+  const chartData = {
+    labels: ['هزینه پیش‌بینی شده', 'هزینه نهایی'],
+    datasets: [
+      {
+        label: 'مرتفع شده',
+        data: [amount.value[1].sumOfEstimatedAmount, user.amountData[1].sumOfFinalAmount],
+        backgroundColor: '#008000d9',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      },
+      {
+        label: 'اتفاق افتاده',
+        data: [amount.value[2].sumOfEstimatedAmount, user.amountData[1].sumOfFinalAmount],
+        backgroundColor: '#ff0000d9',
+        borderColor: 'rgba(153, 102, 255, 1)',
+        borderWidth: 1
+      }
+    ]
+  }
+
+  const chartOptions = {
+    responsive: true,
+    scales: {
+      x: {
+        stacked: false
+      },
+      y: {
+        stacked: false,
+        beginAtZero: true
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'bottom'
+      }
+    }
+  }
+
+  new Chart(chartCanvas.value, {
+    type: 'bar',
+    data: chartData,
+    options: chartOptions
+  })
+}
+
+watch(
+  () => user.amountData,
+  async (newval) => {
+    amount.value = newval
+    loader()
+  }
+)
+</script>
+
+<style scoped>
+canvas {
+  width: 500px;
+}
+</style>

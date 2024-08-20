@@ -14,6 +14,7 @@ export const useUserStore = defineStore("user", {
     hasRiskDetailsData: true,
     hasRiskSolutionsData: true,
     hasRiskStatusData: true,
+    amountData: [],
     oppData: [],
     riskData: [],
     rupchartData: [],

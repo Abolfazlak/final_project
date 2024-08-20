@@ -15,7 +15,7 @@ public class RiskManagementDbContext(DbContextOptions<RiskManagementDbContext> o
     public DbSet<RiskDetails> RiskDetails { get; set; }
     public DbSet<Solution> Solutions { get; set; }
 
-
+    public DbSet<DefaultPressmanRisks> DefaultPressmanRisksEnumerable { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
