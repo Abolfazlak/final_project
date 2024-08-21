@@ -73,6 +73,16 @@ public class RiskRepo(RiskManagementDbContext context) : IRiskRepo
      * This is Risk Category's Part
      *
      */
+    public async Task<SecondaryRiskCategory?> GetSecondaryRiskCategory(string title)
+    {
+        return await context.SecondaryRiskCategories.FirstOrDefaultAsync(s => s.Title == title);
+    }
+
+    public async Task AddSecondaryRiskCategory(SecondaryRiskCategory dto)
+    {
+        await context.SecondaryRiskCategories.AddAsync(dto);
+        await context.SaveChangesAsync();
+    }
     public async Task<List<MainRiskCategoryDto>> GetMainRiskCategories()
     {
         return await context.MainRiskCategories.Select(mrc => new MainRiskCategoryDto
@@ -92,6 +102,15 @@ public class RiskRepo(RiskManagementDbContext context) : IRiskRepo
                 Title = src.Title
             }).ToListAsync();
     }
+
+    public async Task<List<string>> GetDefaultRiskList(int id)
+    {
+        return await context.DefaultPressmanRisksEnumerable
+            .Where(d => d.SecondaryRiskCategoryId == id)
+            .Select(d => d.Title)
+            .ToListAsync();
+    }
+
     
     /*
      *

@@ -16,6 +16,10 @@ public interface IRiskRepo
     //RiskCategory
     public Task<List<MainRiskCategoryDto>> GetMainRiskCategories();
     public Task<List<SecondaryRiskCategoryDto>> GetSecondaryRiskCategories(int id);
+    public Task<SecondaryRiskCategory?> GetSecondaryRiskCategory(string title);
+    public Task AddSecondaryRiskCategory(SecondaryRiskCategory dto);
+    public Task<List<string>> GetDefaultRiskList(int id);
+
 
     //Risks
     public Task AddRiskToDb(Risk risk);

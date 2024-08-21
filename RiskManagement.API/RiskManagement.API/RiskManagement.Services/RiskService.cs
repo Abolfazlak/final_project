@@ -318,6 +318,37 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
         }
     }
 
+    public async Task<ResponseMessage<List<string>>> GetRiskList(int id)
+    {
+        try
+        {
+            var defaultRisk = await repo.GetDefaultRiskList(id);
+
+            if (defaultRisk.Count == 0)
+            {
+                return new ResponseMessage<List<string>>
+                {
+                    Code = 404,
+                    Content = []
+                };
+            }
+            return new ResponseMessage<List<string>>
+            {
+                Code = 200,
+                Content = defaultRisk
+            };
+            
+        }
+        catch (Exception e)
+        {
+            return new ResponseMessage<List<string>>
+            {
+                Code = 500,
+                Content = []
+            };
+        }
+    }
+
     public async Task<ResponseMessage<List<SecondaryRiskCategoryDto>>> GetSecondaryRiskCategories(int id)
     {
         try
@@ -354,9 +385,39 @@ public class RiskService(IRiskRepo repo, IUserService userService) : IRiskServic
     {
         try
         {
+            var s = new SecondaryRiskCategory();
+            
             if (CheckAccessToProject(httpContext, risk.ProjectId, out var responseMessage))
             {
                 return responseMessage!;
+            }
+
+            switch (risk.SecondaryRiskCategory)
+            {
+                case null when string.IsNullOrEmpty(risk.SecondaryRiskCategoryTitle):
+                    return new ResponseMessage<string>
+                    {
+                        Code = 400,
+                        Content = ""
+                    };
+                case null:
+                {
+                    s.Title = risk.SecondaryRiskCategoryTitle!;
+                    s.MainRiskCategoryId = 2;
+                    var src = await repo.GetSecondaryRiskCategory(s.Title);
+                    if (src == null)
+                    {
+                        await repo.AddSecondaryRiskCategory(s);
+                    }
+                    src = await repo.GetSecondaryRiskCategory(s.Title);
+                    if (src != null)
+                        risk.SecondaryRiskCategory = new SecondaryRiskCategoryDto
+                        {
+                            Id = src.Id,
+                            Title = src.Title
+                        };
+                    break;
+                }
             }
 
             var createRisk = CreateRisk(risk);

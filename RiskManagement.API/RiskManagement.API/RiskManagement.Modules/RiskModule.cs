@@ -35,6 +35,18 @@ public class RiskModule : CarterModule
             };
         });
         
+        app.MapGet("/risk/getRiskLists", [Authorize] async (IRiskService service, int id) =>
+        {
+            var res = await service.GetRiskList(id);
+            return res.Code switch
+            {
+                200 => Results.Ok(new { Data = res.Content }),
+                403 => Results.Forbid(),
+                404 => Results.NotFound(),
+                _ => Results.Problem("عملیات با خطا مواجه شد")
+            };
+        });
+        
         app.MapPost("/risk/addRisk", [Authorize] async (IRiskService service, HttpContext httpContext, 
             RiskInputDto dto) =>
         {
@@ -42,6 +54,7 @@ public class RiskModule : CarterModule
             return res.Code switch
             {
                 200 => Results.Ok(new { Data = res.Content }),
+                400 => Results.BadRequest(),
                 403 => Results.Forbid(),
                 _ => Results.Problem(res.Content)
             };

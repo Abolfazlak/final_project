@@ -23,6 +23,8 @@ public interface IRiskService
     //RiskCategory
     public Task<ResponseMessage<List<MainRiskCategoryDto>>> GetMainRiskCategories();
     public Task<ResponseMessage<List<SecondaryRiskCategoryDto>>> GetSecondaryRiskCategories(int id);
+    public Task<ResponseMessage<List<string>>> GetRiskList(int id);
+
 
     //Risks
     public Task<ResponseMessage<string>> AddRiskService(HttpContext httpContext, RiskInputDto risk);

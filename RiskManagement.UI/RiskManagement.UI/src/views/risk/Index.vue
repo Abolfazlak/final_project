@@ -41,6 +41,12 @@
         <template v-slot:item.rowNumber="{ index }">
           {{ index + 1 + itemsPerPage * (currentPage - 1) }}
         </template>
+
+        <template v-slot:item.title="{ item }">
+          <div class="title-table">{{item.title}}</div>
+        </template>
+
+
         <template v-slot:item.actions="{ item }">
           <v-btn
             @click="item.showBtn = !item.showBtn"
@@ -112,10 +118,10 @@ const itemsPerPage = ref(5)
 const currentPage = ref(1)
 
 const headers = [
-  { title: 'ردیف', align: 'start', sortable: false, key: 'rowNumber' },
-  { title: 'عنوان ریسک', key: 'title', align: 'start' },
-  { title: 'گروه ریسک', key: 'mainRiskCategory.title', align: 'start' },
-  { title: 'دسته‌بندی ریسک', key: 'secondaryRiskCategory.title', align: 'start' },
+  { title: 'ردیف', align: 'start', sortable: false, key: 'rowNumber', width: '100px'  },
+  { title: 'عنوان ریسک', key: 'title', align: 'start', width: '400px'},
+  { title: 'گروه ریسک', key: 'mainRiskCategory.title', align: 'start', width: '250px', align: 'center' },
+  { title: 'دسته‌بندی ریسک', key: 'secondaryRiskCategory.title', align: 'center', width: '250px' },
   { title: '', key: 'actions', sortable: false, align: 'start' }
 ]
 const serverItems = ref([])
@@ -246,6 +252,11 @@ watch(
 </script>
 
 <style>
+.title-table{
+  display: flex;
+  width: 100%;
+  margin-left: 100px
+}
 .v-data-table-footer__items-per-page span {
   display: none;
 }

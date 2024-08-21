@@ -51,7 +51,9 @@
         </template>
 
         <template v-slot:item.finishedDate="{ item }">
-          {{ persianTimeInput(item.finishedDate) }}
+          <div v-if="item.status != 0">
+            {{ persianTimeInput(item.finishedDate) }}
+          </div>
         </template>
 
         <template v-slot:item.status="{ item }">
@@ -73,7 +75,9 @@
           >
         </template>
       </v-data-table>
-      <div v-else class="flex justify-center text-center mt-24 pb-128 text-xl"> داده‌ای جهت نمایش وجود ندارد</div>
+      <div v-else class="flex justify-center text-center mt-24 pb-128 text-xl">
+        داده‌ای جهت نمایش وجود ندارد
+      </div>
     </v-card>
   </div>
   <change-status :isModalVisible="isModalVisibleRef" :riskId="riskId"></change-status>
@@ -103,9 +107,9 @@ const itemsPerPage = ref(5)
 const currentPage = ref(1)
 
 const headers = [
-  { title: 'ردیف', align: 'center', sortable: false, key: 'rowNumber' },
-  { title: 'عنوان ', key: 'title', align: 'start' },
-  { title: 'وضعیت', key: 'status', align: 'start' },
+  { title: 'ردیف', align: 'center', sortable: false, key: 'rowNumber', width: '100px' },
+  { title: 'عنوان ', key: 'title', align: 'start', width: '500px' },
+  { title: 'وضعیت', key: 'status', align: 'start', align: 'center' },
   { title: 'تاریخ پیش‌بینی شده', key: 'estimatedFinishedDate', align: 'start' },
   { title: 'تاریخ رخداد', key: 'finishedDate', align: 'start' },
   { title: 'هزینه پیش‌بینی شده', key: 'estimatedAmount', align: 'start' },
