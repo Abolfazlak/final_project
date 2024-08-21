@@ -29,6 +29,11 @@ public class UserRepo(RiskManagementDbContext context) : IUserRepo
         return await context.Users.FirstOrDefaultAsync(u => u.Id == id && u.IsActive);
     }
     
+    public async Task<User?> GetUserByّIdWithoutStatus(long? id)
+    {
+        return await context.Users.FirstOrDefaultAsync(u => u.Id == id);
+    }
+    
     public async Task UpdateUser(User user)
     {
          context.Users.Update(user);

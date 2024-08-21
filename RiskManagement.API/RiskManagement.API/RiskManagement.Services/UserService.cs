@@ -260,7 +260,7 @@ public class UserService(ICommonHelper helper, IUserRepo userRepo) : IUserServic
     {
         try
         {
-            var user = await userRepo.GetUserByّId(id);
+            var user = await userRepo.GetUserByّIdWithoutStatus(id);
 
             if (user == null)
             {
@@ -271,7 +271,7 @@ public class UserService(ICommonHelper helper, IUserRepo userRepo) : IUserServic
                 };
             }
 
-            user.IsActive = false;
+            user.IsActive = !user.IsActive;
 
             await userRepo.UpdateUser(user);
             

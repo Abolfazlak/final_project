@@ -3,12 +3,11 @@
     <v-card class="mx-4 mt-8">
       <v-card-title class="d-flex align-center mb-8">
         <div class="flex justify-between w-full pt-4">
-          <div class="w-1/4 font-bold text-xl mt-2">مدیریت وضعیت ریسک‌های پروژه</div>
-          <div class="flex w-1/4">
+          <div class="w-1/4 font-bold text-xl mt-2">مدیریت کاربران</div>
+          <div class="flex w-1/3">
             <v-locale-provider rtl>
               <v-text-field
-                dir="rtl"
-                class="mt-2 h-12 text-xs"
+                class="mt-2 h-12"
                 items-per-page="5"
                 v-model="search"
                 density="small"
@@ -20,6 +19,12 @@
                 single-line
               ></v-text-field>
             </v-locale-provider>
+            <v-btn
+              class="btn-txt mt-2 mr-4 px-6 ml-4 h-9 text-center items-center flex text-xs text-white"
+              color="#4da35a"
+              @click="showCreateModal"
+              >ایجاد</v-btn
+            >
           </div>
         </div>
       </v-card-title>
@@ -33,28 +38,9 @@
         item-value="id"
         @update:options="loadItems"
       >
-        <!-- Format the amount with commas and add the ریال symbol -->
-        <template v-slot:item.estimatedAmount="{ item }">
-          {{ formatCurrency(item.estimatedAmount) }}
-        </template>
-
-        <template v-slot:item.finalAmount="{ item }">
-          {{ formatCurrency(item.finalAmount) }}
-        </template>
-
-        <template v-slot:item.estimatedFinishedDate="{ item }">
-          {{ persianTimeInput(item.estimatedFinishedDate) }}
-        </template>
-
-        <template v-slot:item.isActive="{ item }">
+      <template v-slot:item.isActive="{ item }">
           <div v-if="item.isActive" class="text-green">فعال</div>
-          <div v-if="!item.isActive" class="text-red">'غیرفعال'</div>
-        </template>
-
-        <template v-slot:item.finishedDate="{ item }">
-          <div v-if="item.finishedDate != null">
-            {{ persianTimeInput(item.finishedDate) }}
-          </div>
+          <div v-if="!item.isActive" class="text-red">غیرفعال</div>
         </template>
 
         <template v-slot:item.rowNumber="{ index }">
@@ -70,24 +56,17 @@
             color="white"
           ></v-btn>
           <v-list class="absolute z-50 mr-16 -mt-16 shadow-lg rounded-lg" v-if="item.showBtn">
-            <v-list-item
-              ><v-btn class="w-20" color="#77817E" @click="showDetailsModal(item.id)"
-                >جزيیات</v-btn
+            <v-list-item>
+              <v-btn class="w-24" color="#EC622E" @click="changePassword(item.id)">
+                تغییر رمز عبور</v-btn
               ></v-list-item
             >
             <v-list-item>
-              <v-btn class="w-20 text-white" color="#4da35a" @click="gotoSolutions(item.id)"
-                >راه‌حل‌ها</v-btn
-              ></v-list-item
-            >
-            <v-list-item>
-              <v-btn class="w-20" color="#EC622E" @click="showUpdateModal(item)">
-                ویرایش</v-btn
-              ></v-list-item
-            >
-            <v-list-item>
-              <v-btn class="w-20" variant="outlined" color="red" @click="deleteRisk(item.id)">
-                حذف</v-btn
+              <v-btn class="w-24" variant="outlined" color="red" @click="changeIsActive(item.id)" v-if="item.isActive">
+                غیرفعال کردن</v-btn>
+
+                <v-btn class="w-24" variant="outlined" color="green" @click="changeIsActive(item.id)" v-else>
+                  فعال کردن</v-btn
               ></v-list-item
             >
           </v-list>
@@ -98,7 +77,7 @@
       </div>
     </v-card>
   </div>
-  <change-status :isModalVisible="isModalVisibleRef" :riskId="riskId"></change-status>
+  <change-status :isModalVisible="isPasswordModalVisibleRef" :riskId="riskId"></change-status>
 </template>
 
 <script setup>
@@ -107,6 +86,7 @@ import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/store.js'
 import moment from 'jalali-moment'
 import ChangeStatus from '@/views/status/ChangeStatus.vue'
+import { toast } from 'vue3-toastify'
 
 const user = useUserStore()
 const route = useRoute()
@@ -115,9 +95,9 @@ user.routeName = route.name
 user.hasSettingData = true
 
 const isCreateModalVisibleRef = ref(false)
-const isModalVisibleRef = ref(false)
+const isPasswordModalVisibleRef = ref(false)
 
-const riskId = ref(0)
+const userId = ref(0)
 
 const token = JSON.parse(localStorage.getItem('token'))
 const search = ref('')
@@ -126,7 +106,7 @@ const currentPage = ref(1)
 
 const headers = [
   { title: 'ردیف', align: 'center', sortable: false, key: 'rowNumber' },
-  { title: 'نام و نام خانودگی', key: 'fullName', align: 'start' },
+  { title: 'نام و نام خانوادگی', key: 'fullName', align: 'start' },
   { title: 'نام کاربری', key: 'userName', align: 'start' },
   { title: 'ایمیل', key: 'email', align: 'start' },
   { title: 'وضعیت', key: 'isActive', align: 'start' },
@@ -137,23 +117,42 @@ const serverItems = ref([])
 const loading = ref(true)
 const totalItems = ref(0)
 
-const projectId = route.params.id
-
 const loadItems = ({ page, itemsPerPage, sortBy }) => {
   currentPage.value = page // Track the current page
   loading.value = true
-  getAllRiskStatus()
+  getAllUsers()
 }
 
-function persianTimeInput(date) {
-  return moment(new Date(date)).locale('fa').format('YYYY/MM/DD HH:mm')
+function changePassword(id) {
+  user.changePasswordModal = true
+  isPasswordModalVisibleRef.value = true
+  userId.value = id
 }
 
-function changeStatusModal(id) {
-  user.changeStatusModal = true
-  isModalVisibleRef.value = true
-  console.log('id', id)
-  riskId.value = id
+function showCreateModal(){
+  user.createUserModal = true
+  isCreateModalVisibleRef.value = true
+}
+
+async function changeIsActive(id){
+  const url = `${user.url}users/changeUserActivity?id=${id}`
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    })
+    if (res.status == 404) {
+      return;
+    }
+    const response = await res.json()
+    toast.success(response.data)
+    loader()
+  } catch (error) {
+    toast.error(error)
+  }
 }
 
 function loader() {
@@ -164,7 +163,7 @@ function loader() {
   })
 }
 
-const getAllRiskStatus = async () => {
+const getAllUsers = async () => {
   const url = `${user.url}users/getAllUsers`
   try {
     const res = await fetch(url, {
@@ -182,14 +181,8 @@ const getAllRiskStatus = async () => {
     totalItems.value = response.data.length
     loading.value = false
   } catch (error) {
-    console.log('response-getAllRiskStatus', error)
+    console.log('response-getAllUsers', error)
   }
-}
-
-// Method to format amount with comma separators and add the "ریال" symbol
-const formatCurrency = (amount) => {
-  if (!amount) return ''
-  return `${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} ریال`
 }
 
 onMounted(() => {
@@ -197,9 +190,9 @@ onMounted(() => {
 })
 
 watch(
-  () => user.createSolutionModal,
+  () => user.changePasswordModal,
   async (newval) => {
-    isCreateModalVisibleRef.value = newval
+    isPasswordModalVisibleRef.value = newval
     if (newval == false) {
       loader()
     }
@@ -207,9 +200,9 @@ watch(
 )
 
 watch(
-  () => user.changeStatusModal,
+  () => user.createUserModal,
   async (newval) => {
-    isModalVisibleRef.value = newval
+    isCreateModalVisibleRef.value = newval
     if (newval == false) {
       loader()
     }

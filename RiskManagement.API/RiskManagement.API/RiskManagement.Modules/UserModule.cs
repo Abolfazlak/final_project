@@ -104,7 +104,7 @@ public class UserModule : CarterModule
             };
         });
         
-        app.MapPost("/users/deactivateUser", async (IUserService service, long id) =>
+        app.MapPost("/users/changeUserActivity", async (IUserService service, long id) =>
         {
             var res = await service.UpdateUserService(id);
             return res.Code switch

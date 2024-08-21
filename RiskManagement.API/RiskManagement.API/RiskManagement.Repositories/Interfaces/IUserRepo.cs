@@ -12,6 +12,8 @@ public interface IUserRepo
     public Task<List<UserDto>> GetUsersByCompany(long companyId);
     public Task<Company?> GetCompanyByName(string companyName);
     public Task<User?> GetUserByّId(long? id);
+    public Task<User?> GetUserByّIdWithoutStatus(long? id);
+
     public Task UpdateUser(User user);
 
 }
