@@ -13,5 +13,5 @@ import { useUserStore } from '@/stores/store.js'
 const user = useUserStore()
 
 // Initial chart data
-const labels = ref(['هنوز نه', 'اتفاق افتاده', 'اتفاق نیفتاده'])
+const labels = ref(['نامشخص', 'اتفاق افتاد', 'اتفاق نیفتاد'])
 </script>

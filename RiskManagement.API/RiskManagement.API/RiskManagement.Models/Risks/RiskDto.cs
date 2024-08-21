@@ -19,6 +19,9 @@ public class RiskStatusDto : RiskDto
     public long EstimatedAmount { get; set; }
     public long? FinalAmount { get; set; }
     public UpdateSolutionDto? BestSolution { get; set; }
+    public int? Score { get; set; }
+    public bool? IsOpportunity { get; set; }
+
 }
 
 public class InputRiskStatusDto

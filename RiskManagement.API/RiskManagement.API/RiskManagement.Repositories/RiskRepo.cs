@@ -52,9 +52,14 @@ public class RiskRepo(RiskManagementDbContext context) : IRiskRepo
                     Amount = s.Amount,
                     RiskId = s.RiskId,
                     Id = s.Id
-                }).FirstOrDefault()
+                }).FirstOrDefault(),
+                IsOpportunity = r.RiskDetails.Count != 0 && r.RiskDetails.First().IsOpportunity,
+                Score = r.RiskDetails.Count != 0 ? 
+                    r.RiskDetails.First().IsOpportunity ? r.RiskDetails.First().OpportunityScore
+                        : r.RiskDetails.First().RiskScore : 0
 
 
+                
 
             }).ToListAsync();
         

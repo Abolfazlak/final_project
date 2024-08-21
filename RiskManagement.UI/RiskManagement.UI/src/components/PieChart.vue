@@ -10,9 +10,10 @@
 import { computed, ref } from 'vue'
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 
-// Register required components for Chart.js
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
+// Register required components and plugins for Chart.js
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, ChartDataLabels)
 
 // Define props for labels and dataset
 const props = defineProps({
@@ -44,6 +45,17 @@ const chartOptions = ref({
   plugins: {
     legend: {
       position: 'bottom'
+    },
+    datalabels: {
+      display: true,
+      color: '#fff',
+      font: {
+        size: 20, // Set the font size
+        weight: 'bold' // Set the font weight (optional)
+      },
+      formatter: (value) => {
+        return value > 0 ? value : '' // Show value only if it's greater than 0
+      }
     },
     title: {
       display: false,

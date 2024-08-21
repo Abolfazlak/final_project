@@ -56,6 +56,24 @@
           </div>
         </template>
 
+        <template v-slot:item.isOpportunity="{ item }">
+          <div v-if="item.isOpportunity == true">
+            <div class="text-black">فرصت</div>
+          </div>
+          <div v-else>
+            <div class="text-red">تهدید</div>
+          </div>
+        </template>
+
+        <template v-slot:item.score="{ item }">
+          <div v-if="item.isOpportunity == true">
+            <div>%{{ (item.score / 9) * 100 }}</div>
+          </div>
+          <div v-else>
+            <div>%{{ (item.score / 25) * 100 }}</div>
+          </div>
+        </template>
+
         <template v-slot:item.status="{ item }">
           <div v-if="item.status == 0" class="text-black">نامشخص</div>
           <div v-if="item.status == 1" class="text-red">اتفاق افتاد</div>
@@ -109,6 +127,8 @@ const currentPage = ref(1)
 const headers = [
   { title: 'ردیف', align: 'center', sortable: false, key: 'rowNumber', width: '100px' },
   { title: 'عنوان ', key: 'title', align: 'start', width: '500px' },
+  { title: 'نوع', key: 'isOpportunity', align: 'start', align: 'center' },
+  { title: 'شدت', key: 'score', align: 'start', align: 'center' },
   { title: 'وضعیت', key: 'status', align: 'start', align: 'center' },
   { title: 'تاریخ پیش‌بینی شده', key: 'estimatedFinishedDate', align: 'start' },
   { title: 'تاریخ رخداد', key: 'finishedDate', align: 'start' },
