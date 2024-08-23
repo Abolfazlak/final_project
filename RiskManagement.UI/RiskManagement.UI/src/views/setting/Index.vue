@@ -77,16 +77,15 @@
       </div>
     </v-card>
   </div>
-  <change-status :isModalVisible="isPasswordModalVisibleRef" :riskId="riskId"></change-status>
+  <create-user :isCreateModalVisible="isCreateModalVisibleRef"></create-user>
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/store.js'
-import moment from 'jalali-moment'
-import ChangeStatus from '@/views/status/ChangeStatus.vue'
 import { toast } from 'vue3-toastify'
+import CreateUser from './CreateUser.vue'
 
 const user = useUserStore()
 const route = useRoute()

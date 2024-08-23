@@ -428,8 +428,8 @@ watch(
 }
 .Navbar-Right-Logo {
   width: 70px;
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
+  -webkit-filter: grayscale(30%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(30%);
 }
 .Navbar-Right-Logo:hover {
   cursor: pointer;

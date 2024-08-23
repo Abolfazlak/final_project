@@ -56,7 +56,7 @@
             icon="mdi-format-list-bulleted"
             color="white"
           ></v-btn>
-          <v-list class="absolute z-50 mr-16 -mt-16 shadow-lg rounded-lg" v-if="item.showBtn">
+          <v-list class="flex-col absolute z-100 mr-16 -mt-64 shadow-lg rounded-lg" v-if="item.showBtn">
             <v-list-item
               ><v-btn class="w-20" color="#77817E" @click="showDetailsModal(item.id)"
                 >جزيیات</v-btn

@@ -25,7 +25,7 @@
                   متدولوژی :‌
                   <p class="font-bold pr-4">{{ item.methodology }}</p>
                 </div>
-                <div class="flex text-lg w-1/2">
+                <div class="flex text-lg w-2/3">
                   توضیحات :
                   <p class="font-bold pr-4">{{ item.description }}</p>
                 </div>

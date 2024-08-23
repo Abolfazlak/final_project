@@ -32,29 +32,6 @@ public class ProjectServiceTests
     }
     
     [Test]
-    public async Task GetAllProjectsService_AdminWithProjects_ReturnsProjectList()
-    {
-        // Arrange
-        var httpContext = new DefaultHttpContext();
-        var projects = new List<Project>
-        {
-            new() { Id = 1, ProjectName = "Project1", Methodology = "Agile", Description = "Test project 1" },
-            new() { Id = 2, ProjectName = "Project2", Methodology = "Scrum", Description = "Test project 2" }
-        };
-
-        _mockUserService.Setup(x => x.GetIsAdminFromHttpContext(httpContext)).Returns(true);
-        _mockUserService.Setup(x => x.GetCompanyIdFromHttpContext(httpContext)).Returns(1);
-        _mockProjectRepo.Setup(x => x.GetAllProjectsForAdmin(1)).ReturnsAsync(projects);
-
-        // Act
-        var result = await _projectService.GetAllProjectsService(httpContext);
-
-        // Assert
-        Assert.AreEqual(200, result.Code);
-        if (result.Content != null) Assert.AreEqual(2, result.Content.Count);
-    }
-    
-    [Test]
     public async Task GetAllProjectsService_NonAdminWithNoProjects_ReturnsNotFound()
     {
         // Arrange

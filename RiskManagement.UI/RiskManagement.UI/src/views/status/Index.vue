@@ -67,10 +67,10 @@
 
         <template v-slot:item.score="{ item }">
           <div v-if="item.isOpportunity == true">
-            <div>%{{ (item.score / 9) * 100 }}</div>
+            <div>%{{ Math.trunc( (item.score / 9) * 100) }}</div>
           </div>
           <div v-else>
-            <div>%{{ (item.score / 25) * 100 }}</div>
+            <div>%{{ Math.trunc( (item.score / 25) * 100) }}</div>
           </div>
         </template>
 

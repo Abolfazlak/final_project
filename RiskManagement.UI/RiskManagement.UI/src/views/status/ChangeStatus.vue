@@ -1,6 +1,6 @@
 <template>
   <modal :show="isModalVisibleRef" @close="closeModal">
-    <template v-slot:header> <div class="font-bold text-base">جزئیات ریسک</div></template>
+    <template v-slot:header> <div class="font-bold text-base">تغییر وضعیت ریسک</div></template>
     <template v-slot:body>
       <v-locale-provider rtl>
         <v-container class="h-96 overflow-auto">
@@ -51,7 +51,10 @@
             </v-radio-group>
           </v-row>
 
-          <v-row class="flex gap-3 items-center text-center justify-center mt-16 px-3">
+          <v-row
+            class="flex gap-3 items-center text-center justify-center mt-16 px-3"
+            v-if="statusRef == 'اتفاق نیفتاد'"
+          >
             <v-textarea
               v-if="isNewSolutionRef"
               v-model="model.solutionTitle"
@@ -177,7 +180,7 @@ function addNewStatusBtn() {
     model.status = 2
   }
 
-  if (!model.isNewSolution) {
+  if (!model.isNewSolution && model.status == 'اتفاق نیفتاد') {
     model.solutionId = chosenSolution.value.id
   }
   console.log('model', model)
@@ -196,8 +199,8 @@ async function changeStatus() {
       },
       body: JSON.stringify(model)
     })
-    if(res.status == 401){
-      user.Logout();
+    if (res.status == 401) {
+      user.Logout()
     }
     await res.json().then((response) => {
       toast.success(response.data)
@@ -219,7 +222,7 @@ const getAllSolutions = async (id) => {
       }
     })
     const response = await res.json()
-    solutionsRef.value = Array.isArray(response.data) ? response.data : [];
+    solutionsRef.value = Array.isArray(response.data) ? response.data : []
   } catch (error) {
     console.log('response-getAllSolutions', error)
   }
@@ -259,9 +262,9 @@ watch(
 watch(
   () => solutionsRef.value,
   (newVal) => {
-    console.log('solutionsRef updated:', newVal);
+    console.log('solutionsRef updated:', newVal)
   }
-);
+)
 </script>
 
 <style></style>
