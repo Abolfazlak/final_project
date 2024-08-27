@@ -14,7 +14,7 @@
           <v-text-field
             v-model="formattedAmount"
             @input="updateSolutionAmount"
-            label="هزینه برآورد شده پس از آن "
+            label="هزینه برآورد شده پس از آن(ریال)"
             variant="outlined"
             rounded="lg"
             type="text"

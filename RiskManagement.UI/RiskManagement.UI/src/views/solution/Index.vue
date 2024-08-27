@@ -50,7 +50,7 @@
         <template v-slot:item.actions="{ item }">
           <v-btn
             @click="item.showBtn = !item.showBtn"
-            class="ml-16 text-black"
+            class="ml-16 text-black my-4"
             size="small"
             density="default"
             icon="mdi-format-list-bulleted"

@@ -9,6 +9,7 @@ public class ReportRepo(RiskManagementDbContext context) : IReportRepo
 {
     public async Task<List<RiskAmountSummary>> GetRiskAmountSummariesAsync(long id)
     {
+        // Fetch the initial grouped data
         var riskAmountSummaries = await context.Risks
             .Where(r => r.ProjectId == id)
             .GroupBy(r => r.Status)
@@ -16,12 +17,30 @@ public class ReportRepo(RiskManagementDbContext context) : IReportRepo
             {
                 Status = g.Key,
                 SumOfFinalAmount = g.Sum(r => r.FinalAmount ?? 0),
-                SumOfEstimatedAmount = g.Sum(r => r.RiskDetails.Sum(rd => rd.EstimatedRiskAmount))
+                SumOfEstimatedAmount = g.Sum(r => r.RiskDetails.Sum(rd => rd.EstimatedRiskAmount) 
+                + r.RiskDetails.Sum(rd => rd.EstimatedOpportunityAmount))
             })
             .ToListAsync();
 
+        // Ensure statuses 0, 1, and 2 are included with zero amounts if missing
+        var requiredStatuses = new[] { 0, 1, 2 };
+
+        foreach (var status in requiredStatuses)
+        {
+            if (!riskAmountSummaries.Any(r => r.Status == status))
+            {
+                riskAmountSummaries.Add(new RiskAmountSummary
+                {
+                    Status = status,
+                    SumOfFinalAmount = 0,
+                    SumOfEstimatedAmount = 0
+                });
+            }
+        }
+
         return riskAmountSummaries;
     }
+
     
     public async Task<int[,]> GetRiskCountsGrid(long id)
     {
