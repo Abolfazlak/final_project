@@ -31,6 +31,7 @@
               variant="outlined"
               rounded="lg"
               :prepend-avatar="avatar"
+              return-object
             >
               <template v-slot:chip="{ props, item }">
                 <v-chip v-bind="props" :prepend-avatar="avatar" :text="item.raw.name"></v-chip>
@@ -46,6 +47,7 @@
               </template>
             </v-autocomplete>
             <v-select
+              v-model="updateItems.methodology"
               class="w-1/2 mr-2"
               label="متدولوژی"
               variant="outlined"

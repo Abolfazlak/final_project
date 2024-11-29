@@ -39,7 +39,7 @@
     <template v-slot:body v-if="!isRegisterForm">
       <div class="">
         <div class="flex text-lg font-medium items-center text-center justify-center">
-          به سامانه مدیریت ریسک خوش آمدید
+          به راسا خوش آمدید
         </div>
         <v-container class="mt-4">
           <v-locale-provider rtl>

@@ -4,7 +4,6 @@ using RiskManagement.API.RiskManagement.Models.Risks;
 using RiskManagement.API.RiskManagement.Services.Interfaces;
 
 namespace RiskManagement.API.RiskManagement.Modules;
-
 public class ReportModule : CarterModule
 {
     public override void AddRoutes(IEndpointRouteBuilder app)

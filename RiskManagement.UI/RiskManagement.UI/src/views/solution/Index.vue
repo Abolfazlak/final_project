@@ -104,7 +104,7 @@ const currentPage = ref(1)
 
 const headers = [
   { title: 'ردیف', align: 'start', sortable: false, key: 'rowNumber' },
-  { title: 'عنوان راه‌حل', key: 'description', align: 'start' },
+  { title: 'عنوان راه‌حل', key: 'description', align: 'start', width: '700px' },
   { title: 'هزینه برآورد شده پس از آن', key: 'amount', align: 'start' },
   { title: '', key: 'actions', sortable: false }
 ]
@@ -153,6 +153,10 @@ const getAllSolutions = async (id) => {
     })
     if (res.status == 404) {
       user.hasRiskSolutionsData = false
+      return
+    }
+    if (res.status == 200) {
+      user.hasRiskSolutionsData = true
     }
     const response = await res.json()
     serverItems.value = response.data
